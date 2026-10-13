@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'Le routage côté serveur',
+  verification: { aiReviewed: true, humanValidated: false, references: ['MDN: HTTP overview', 'Express routing guide'] },
+}
+
+# Le routage côté serveur
+
+Le routage serveur associe une requête entrante à un traitement selon des critères tels que la méthode HTTP et le chemin. Les détails de configuration varient selon le framework.
+
+<Pourquoi id="pourquoi">
+
+Lina clique sur « Mes recettes » et voit une erreur. Dans l’onglet Réseau, la requête part vers `/api/recettes`, mais le serveur répond `404`. Elle veut savoir comment un serveur choisit le code chargé de répondre à ce chemin.
+
+Le routage est le premier aiguillage côté serveur : il associe une méthode et un chemin à un traitement. Repérer ce rôle aide Lina à distinguer une requête qui n’a pas trouvé de route d’une erreur survenue plus tard, sans prétendre que le statut révèle à lui seul toute la configuration.
+
+</Pourquoi>
+
+<ParcoursMini zone="serveur" etape="La requête est aiguillée vers une route" />
+
+<Instructions id="instructions">
+
+1. Reprends une requête d’API observée dans M1 et note sa méthode et son chemin, par exemple `GET /api/recettes`.
+2. Dans un projet de démonstration, cherche la déclaration de route qui correspond à cette paire. Les conventions de nommage dépendent du framework.
+3. Compare-la à une route voisine, par exemple `POST /api/recettes`. Même chemin ne signifie pas nécessairement même traitement, car la méthode peut différer.
+4. Note le nom de la fonction ou du contrôleur auquel la route délègue, si cette information est visible.
+5. Si tu ne trouves pas de route, formule cela comme une piste à vérifier, pas comme la cause certaine d’une réponse `404` observée ailleurs.
+
+</Instructions>
+
+<Indice niveau={1} titre="Cherche méthode et chemin ensemble">
+
+Une route peut dépendre à la fois de `GET` et de `/api/recettes`, pas seulement du chemin.
+
+</Indice>
+
+<Indice niveau={2} titre="Regarde où la route délègue">
+
+Après l’association, le framework appelle généralement un handler, une fonction ou un contrôleur. Le nom précis dépend de l’application.
+
+</Indice>
+
+<Exercice id="exercice" titre="Associe trois requêtes à des routes">
+
+Dans un exemple de routes, repère ce qui répond à `GET /api/recettes` et à `POST /api/recettes`. Écris pourquoi ces deux requêtes peuvent conduire à des traitements différents.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Le chemin peut être identique, mais les méthodes expriment des intentions différentes : `GET` demande une représentation, tandis que `POST` demande un traitement défini par la ressource. Un framework peut donc associer chaque paire méthode-chemin à un handler distinct. Les noms et la syntaxe exacts sont propres au framework.
+
+</Indice>
+
+</Exercice>

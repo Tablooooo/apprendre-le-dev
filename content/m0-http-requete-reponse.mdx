@@ -1,0 +1,70 @@
+export const metadata = {
+  title: 'Une requête, une réponse',
+  verification: {
+    aiReviewed: true,
+    humanValidated: false,
+    references: ['MDN: HTTP overview', 'MDN: HTTP messages'],
+  },
+}
+
+# Une requête, une réponse
+
+<Pourquoi id="pourquoi">
+
+Léa vient de remplir un formulaire pour créer son compte. Elle clique sur « Créer mon compte ». Le bouton réagit, mais aucun compte n’apparaît et la page ne dit pas si quelque chose a échoué. Pour comprendre où chercher, Léa doit pouvoir suivre ce qui part de son navigateur et ce qui revient du serveur.
+
+L’échange HTTP est le passage observable entre les deux : le navigateur envoie une requête, puis reçoit une réponse. Cette leçon permet d’identifier ces deux messages et leurs grandes parties, sans supposer ce que le serveur fait en coulisses.
+
+</Pourquoi>
+
+<ParcoursMini zone="http" etape="La requête part, la réponse revient" />
+
+<Instructions id="instructions">
+
+1. Ouvre cette page dans un navigateur sur ordinateur, puis ouvre les outils de développement (`F12` ou `⌥⌘I` sur macOS).
+2. Choisis l’onglet **Réseau** (*Network*). Active « Conserver le journal » si cette option est proposée.
+3. Recharge la page. Repère une ligne dont le type est `document`, puis sélectionne-la.
+4. Dans les détails, repère l’URL demandée, la méthode de la requête et le statut de la réponse. Ils varient selon la page et le navigateur.
+5. Ouvre les en-têtes (*Headers*). Distingue les en-têtes de requête de ceux de réponse. Ils décrivent le message, ils ne sont pas le contenu du message.
+6. Ouvre l’onglet de réponse (*Response* ou *Preview*) si une réponse est disponible. Compare son contenu au statut et au type de ressource.
+7. Note ce que tu peux constater, puis ce qui reste invisible : par exemple, cette vue ne prouve pas à elle seule qu’une base de données a été consultée.
+
+</Instructions>
+
+**À retenir :** une requête HTTP et une réponse HTTP sont deux messages distincts. Les outils du navigateur montrent l’échange observé, mais pas automatiquement tout le travail interne du serveur.
+
+<Indices>
+
+<Indice niveau={1} titre="Un premier repère">
+
+Dans l’onglet Réseau, commence par une ligne de type `document`. C’est le document demandé pour afficher la page.
+
+</Indice>
+
+<Indice niveau={2} titre="Savoir quoi comparer">
+
+Dans les détails de la ligne, la **méthode** et les **en-têtes de requête** appartiennent à la demande du navigateur. Le **statut** et les **en-têtes de réponse** appartiennent à ce que le serveur a renvoyé.
+
+</Indice>
+
+</Indices>
+
+<Exercice id="exercice" titre="Fais parler un échange">
+
+Choisis une ligne de requête dans l’onglet Réseau et note :
+
+- l’URL demandée ;
+- la méthode HTTP ;
+- le statut de la réponse ;
+- un en-tête de requête et un en-tête de réponse ;
+- une chose que ces informations ne te permettent pas de conclure.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Pour une page HTML, tu pourrais observer une méthode `GET`, un statut `200` et un en-tête de réponse `Content-Type: text/html`. Le navigateur demande une ressource ; le serveur répond avec un statut et des métadonnées, et éventuellement un corps contenant le HTML. Les valeurs exactes dépendent de la ressource. Tu ne peux pas déduire de ces seuls éléments qu’une base de données a été interrogée.
+
+**La leçon est reconnue** quand tu sais retrouver les deux messages et distinguer les informations visibles des suppositions.
+
+</Indice>
+
+</Exercice>

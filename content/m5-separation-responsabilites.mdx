@@ -1,0 +1,53 @@
+export const metadata = {
+  title: 'Séparer les responsabilités',
+  verification: { aiReviewed: true, humanValidated: false, references: ['Martin Fowler: Refactoring', 'Robert C. Martin: Clean Architecture'] },
+}
+
+# Séparer les responsabilités
+
+Séparer les responsabilités consiste à organiser le code pour que chaque partie ait un rôle compréhensible et des raisons de changer limitées. Il n’existe pas un découpage unique valable pour tous les projets.
+
+<Pourquoi id="pourquoi">
+
+Jeanne doit modifier la création d’une recette. Elle trouve une seule fonction qui lit le corps HTTP, vérifie les champs, décide si l’auteur a le droit de publier, construit une requête SQL, écrit un journal et prépare le JSON de réponse. Elle hésite à toucher au code, car une modification du format de réponse pourrait casser la sauvegarde.
+
+Rendre les rôles visibles aide à localiser l’effet d’un changement et à tester le comportement plus facilement. Cela ne signifie pas créer une classe pour chaque ligne : le découpage doit réduire la confusion réelle du code, pas ajouter des couches sans bénéfice.
+
+</Pourquoi>
+
+<ParcoursMini zone="serveur" etape="Plusieurs responsabilités traversent le traitement d’une requête" />
+
+<Instructions id="instructions">
+
+1. Dans un petit projet que tu peux modifier, choisis une action concrète, comme créer une recette.
+2. Écris dans l’ordre les tâches effectuées : recevoir HTTP, valider la forme, appliquer une règle métier, accéder aux données, préparer la réponse.
+3. Repère quelles tâches sont mélangées dans les mêmes fonctions ou fichiers. Base-toi sur le comportement observé, pas uniquement sur le nom des fichiers.
+4. Choisis un seul mélange qui rend un changement risqué ou difficile à comprendre.
+5. Déplace ou clarifie ce rôle en petits changements, puis exécute les tests ou vérifications disponibles.
+6. Compare le code avant/après et vérifie qu’il est devenu plus lisible sans avoir ajouté de détour inutile.
+
+</Instructions>
+
+<Indice niveau={1} titre="Commence par l’action, pas par les dossiers">
+
+Trace ce qui arrive à la requête de l’entrée HTTP jusqu’à la réponse.
+
+</Indice>
+
+<Indice niveau={2} titre="Une responsabilité n’est pas forcément une classe">
+
+Tu peux clarifier une fonction, extraire une règle ou nommer un module. Le bon changement est le plus petit qui rende le rôle compréhensible et limite le risque.
+
+</Indice>
+
+<Exercice id="exercice" titre="Propose un découpage qui réduit un risque">
+
+Une fonction `createRecipe` reçoit la requête, valide le titre, enregistre la recette et construit le JSON. Choisis deux responsabilités à distinguer et explique quel changement serait plus sûr ensuite.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+On peut garder la réception et la traduction HTTP dans le contrôleur, déplacer la règle de validation métier ou l’opération d’enregistrement derrière un service, puis préparer la représentation de sortie séparément si le besoin le justifie. Par exemple, changer le format de réponse n’oblige plus à modifier la règle d’enregistrement. La bonne frontière dépend du projet : il faut éviter de multiplier les couches si la séparation ne clarifie rien.
+
+</Indice>
+
+</Exercice>

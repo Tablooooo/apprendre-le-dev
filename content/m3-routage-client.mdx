@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'Routage client : choisir la page',
+  verification: { aiReviewed: true, humanValidated: false, references: ['React Router: Routing', 'Next.js: Linking and Navigating'] },
+}
+
+# Routage client : choisir la page
+
+Le routage client choisit quelle vue présenter en fonction de l’adresse ou de l’état de navigation dans une application. Il ne désigne pas le code qui envoie une requête à une API.
+
+<Pourquoi id="pourquoi">
+
+Yanis clique sur le nom d’une recette et s’attend à ouvrir sa page de détail. L’adresse dans la barre change, mais il reste sur la liste. Il se demande comment l’application décide quelle vue montrer pour `/recettes/42`.
+
+Le routage client relie un emplacement de navigation à une vue côté navigateur. Le client HTTP, lui, effectue des échanges avec un serveur. Une navigation peut parfois déclencher le chargement de données, mais choisir la page et demander ses données sont deux responsabilités différentes.
+
+</Pourquoi>
+
+<ParcoursMini zone="navigateur" etape="L’URL côté client choisit la vue à afficher" />
+
+<Instructions id="instructions">
+
+1. Ouvre une application de démonstration et clique sur un lien interne vers une page de détail.
+2. Observe l’URL avant et après le clic et note quelle vue apparaît.
+3. Recharge directement l’adresse de détail. Note si le serveur ou l’application permet d’arriver à cette vue depuis cette adresse.
+4. Dans un projet d’exemple, cherche la déclaration qui associe un chemin à une page ou à un composant.
+5. Cherche séparément le code qui récupère les données affichées ; il peut utiliser le client HTTP, mais ce n’est pas la déclaration de route elle-même.
+
+</Instructions>
+
+<Indice niveau={1} titre="Suis le changement d’URL et de vue">
+
+Le routage client concerne la destination de navigation et la vue présentée.
+
+</Indice>
+
+<Indice niveau={2} titre="Une route n’est pas une requête API">
+
+Une route comme `/recettes/42` peut choisir le composant de détail ; un appel comme `GET /api/recettes/42` demande des données. Les chemins ressemblent parfois, mais leurs rôles diffèrent.
+
+</Indice>
+
+<Exercice id="exercice" titre="Classe navigation et chargement de données">
+
+Pour « afficher la page détail de recette 42 » et « récupérer les données de recette 42 », indique lequel relève du routage client et lequel d’un client HTTP.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Choisir la vue de détail pour l’adresse `/recettes/42` relève du routage client. Envoyer une requête telle que `GET /api/recettes/42` pour recevoir les données relève du client HTTP. Une application peut coordonner les deux lors de la navigation, sans les confondre.
+
+</Indice>
+
+</Exercice>

@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'Contexte : partager une valeur',
+  verification: { aiReviewed: true, humanValidated: false, references: ['React: Passing Data Deeply with Context', 'React: useContext'] },
+}
+
+# Contexte : partager une valeur
+
+Le contexte est un mécanisme permettant à des composants de lire une valeur fournie par un composant situé plus haut dans l’arbre. Il évite parfois de transmettre la même propriété à travers plusieurs niveaux, mais ne remplace pas tous les états locaux.
+
+<Pourquoi id="pourquoi">
+
+Dans l’application de recettes, plusieurs niveaux de composants séparent l’en-tête du bouton qui affiche le thème clair ou sombre. Ana doit transmettre la préférence de thème à travers des composants qui ne l’utilisent pas eux-mêmes. Elle cherche un moyen de rendre cette valeur disponible plus bas dans l’arbre.
+
+En React, Context permet à un fournisseur (*provider*) de rendre une valeur disponible à des descendants qui la lisent. Cela peut éviter le passage répétitif de props intermédiaires. Ce mécanisme ne synchronise pas automatiquement la valeur avec un serveur et peut déclencher des rendus selon la façon dont la valeur change.
+
+</Pourquoi>
+
+<ParcoursMini zone="navigateur" etape="Une valeur est fournie à plusieurs composants descendants" />
+
+<Instructions id="instructions">
+
+1. Dans une application React de démonstration, repère une valeur utilisée par plusieurs composants éloignés dans l’arbre, par exemple la langue ou le thème.
+2. Cherche où cette valeur est créée et où le contexte est fourni.
+3. Repère un composant descendant qui lit cette valeur avec l’API de contexte du projet.
+4. Compare ce trajet à une propriété passée directement de parent à enfant.
+5. Note pourquoi utiliser du contexte pour une valeur consommée par un seul composant pourrait être inutile.
+
+</Instructions>
+
+<Indice niveau={1} titre="Trouve la paire fournisseur / lecteur">
+
+Repère le composant qui fournit la valeur, puis celui qui la lit plus bas.
+
+</Indice>
+
+<Indice niveau={2} titre="Le contexte évite certains relais de props">
+
+Les composants intermédiaires n’ont pas à recevoir puis retransmettre cette valeur s’ils ne l’utilisent pas.
+
+</Indice>
+
+<Exercice id="exercice" titre="Choisis entre prop et contexte">
+
+Une étiquette de recette est utilisée seulement par la vignette enfant immédiate. Le thème de l’application est lu par l’en-tête, le menu et plusieurs contrôles imbriqués. Pour chacun, indique si une prop ou un contexte semble le plus direct, avec une raison.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Pour une valeur utilisée uniquement par l’enfant immédiat, une prop est généralement directe. Pour un thème lu par plusieurs descendants éloignés, le contexte peut éviter de relayer la même prop à travers des composants intermédiaires. C’est un choix de structure ; le contexte n’est pas automatiquement préférable dans tous les cas.
+
+</Indice>
+
+</Exercice>

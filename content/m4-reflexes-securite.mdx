@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'Réflexes de sécurité web',
+  verification: { aiReviewed: true, humanValidated: false, references: ['OWASP: Application Security Verification Standard', 'OWASP: Cheat Sheet Series'] },
+}
+
+# Réflexes de sécurité web
+
+La sécurité web repose sur plusieurs contrôles complémentaires, appliqués aux bonnes frontières. Aucun en-tête, jeton ou filtre isolé ne garantit qu’une application est sécurisée.
+
+<Pourquoi id="pourquoi">
+
+Mina reçoit un message lui signalant qu’une recette a été publiée sous son nom alors qu’elle ne l’a pas soumise. Elle veut examiner le flux de création : qui a envoyé la requête, quelle session était active, quelles données ont été vérifiées, et quelles traces peuvent aider à comprendre l’action.
+
+Une enquête utile sépare les faits observés des hypothèses, puis examine les frontières : authentification, autorisation, validation, rendu de contenu, transport et journalisation. Les protections doivent correspondre à la menace et au framework. Des journaux ne doivent pas exposer de mots de passe, jetons ou autres secrets.
+
+</Pourquoi>
+
+<ParcoursMini zone="transversal" etape="Plusieurs contrôles protègent chaque étape" />
+
+<Instructions id="instructions">
+
+1. Dans un environnement local ou de test autorisé, choisis une action sensible et dessine le chemin navigateur → requête → serveur → réponse.
+2. À chaque frontière, note une question défensive : qui est authentifié, cette personne est-elle autorisée, les données sont-elles valides, le contenu est-il rendu comme texte ?
+3. Repère quelles protections sont visibles dans le code ou la configuration et quelles choses restent à vérifier.
+4. Vérifie que les journaux de test masquent ou excluent les secrets et données personnelles inutiles.
+5. Écris une mesure concrète et un risque résiduel plutôt que de déclarer l’action « sécurisée » sur la base d’un contrôle unique.
+
+</Instructions>
+
+<Indice niveau={1} titre="Suis toute l’action, pas un seul outil">
+
+Une création traverse plusieurs frontières ; une protection à une étape ne couvre pas automatiquement les autres.
+
+</Indice>
+
+<Indice niveau={2} titre="Cherche l’équilibre entre contrôles et preuves">
+
+Authentification, autorisation, validation, rendu sûr, transport protégé et journaux prudents répondent à des risques différents. Observe ce qui est réellement implémenté.
+
+</Indice>
+
+<Exercice id="exercice" titre="Fais une mini-revue défensive">
+
+Pour une action de création de recette en environnement local, note deux contrôles à vérifier et une donnée qu’il ne faut pas écrire telle quelle dans les journaux.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+On peut vérifier côté serveur l’autorisation de créer et la validation des champs, puis vérifier que la description est rendue sans interpréter du HTML non fiable. Un mot de passe, cookie de session, jeton d’accès ou secret ne doit pas être journalisé en clair. Ces vérifications réduisent certains risques sans prouver l’absence de toutes les vulnérabilités.
+
+</Indice>
+
+</Exercice>

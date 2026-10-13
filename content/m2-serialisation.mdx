@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'Préparer la réponse avec la sérialisation',
+  verification: { aiReviewed: true, humanValidated: false, references: ['MDN: JSON', 'MDN: Response'] },
+}
+
+# Préparer la réponse avec la sérialisation
+
+La sérialisation transforme une valeur en une représentation transportable, par exemple en texte JSON. Elle ne décide pas à elle seule quelles données l’API a le droit d’exposer.
+
+<Pourquoi id="pourquoi">
+
+Claire reçoit la réponse de l’API de recettes et découvre que le JSON contient un chemin local utilisé par le serveur. L’interface n’en a pas besoin. Elle veut comprendre où les données du modèle deviennent le corps de réponse transmis au navigateur.
+
+La sérialisation intervient lorsqu’une valeur en mémoire est convertie vers un format transmissible. Choisir ou filtrer les champs exposés est une décision distincte, souvent appelée sélection de représentation ou projection. Un JSON valide peut encore contenir trop, trop peu ou de mauvaises données.
+
+</Pourquoi>
+
+<ParcoursMini zone="serveur" etape="La valeur est convertie en corps de réponse" />
+
+<Instructions id="instructions">
+
+1. Dans un projet de démonstration, repère une réponse d’API JSON dans les DevTools.
+2. Suis le handler ou le service jusqu’au point où le corps de réponse est construit.
+3. Observe si le projet sérialise directement un objet ou construit d’abord une représentation limitée aux champs nécessaires.
+4. Compare les clés JSON renvoyées aux informations affichées par le client.
+5. Repère quel code définit le type de contenu de la réponse, s’il est visible, et distingue-le de la sérialisation du corps.
+
+</Instructions>
+
+<Indice niveau={1} titre="Repère le corps envoyé">
+
+Dans l’onglet Réseau, le corps JSON reçu est la représentation visible sur le fil.
+
+</Indice>
+
+<Indice niveau={2} titre="Conversion et sélection de champs">
+
+Sérialiser convertit une valeur vers un format. Choisir les propriétés exposées détermine le contenu ; ce sont deux responsabilités qu’il faut examiner séparément.
+
+</Indice>
+
+<Exercice id="exercice" titre="Propose une réponse minimale">
+
+Un modèle de recette contient `id`, `title`, `authorEmail` et `internalFilePath`. Propose les champs nécessaires à une liste publique et explique pourquoi sérialiser directement tout le modèle peut poser problème.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Une liste publique peut ne nécessiter que `id` et `title` (et éventuellement d’autres champs explicitement requis). `authorEmail` et `internalFilePath` ne sont pas nécessaires dans cet exemple. La sérialisation convertit la représentation choisie en JSON ; elle ne décide pas automatiquement quels champs sont sûrs ou utiles à exposer.
+
+</Indice>
+
+</Exercice>

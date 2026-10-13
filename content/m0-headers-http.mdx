@@ -1,0 +1,57 @@
+export const metadata = {
+  title: 'Les informations autour du message',
+  verification: {
+    aiReviewed: true,
+    humanValidated: false,
+    references: ['MDN: HTTP headers', 'RFC 9110'],
+  },
+}
+
+# Les informations autour du message
+
+Les en-têtes HTTP (headers) sont des champs de métadonnées associés à une requête ou à une réponse. Il existe des en-têtes de requête et des en-têtes de réponse.
+
+<Pourquoi id="pourquoi">
+
+Élodie télécharge le reçu d’une commande. Le navigateur affiche une page de texte brut au lieu de proposer un fichier lisible. Dans l’onglet Réseau, elle remarque que la réponse a un en-tête `Content-Type: text/plain`, alors qu’elle s’attendait à un PDF.
+
+Les en-têtes aident à comprendre comment un message est décrit et comment certains destinataires peuvent le traiter. Ils donnent un indice sur le type annoncé, mais ne prouvent ni que le corps est valide, ni que le serveur a généré le bon document.
+
+</Pourquoi>
+
+<ParcoursMini zone="http" etape="Les métadonnées accompagnent les messages" />
+
+<Instructions id="instructions">
+
+1. Ouvre les outils de développement et sélectionne une requête de type document ou une ressource dans l’onglet **Réseau** (*Network*).
+2. Dans **En-têtes** (*Headers*), trouve la section des en-têtes de requête et celle des en-têtes de réponse.
+3. Repère `Accept` dans la requête, s’il est présent. Il exprime des types de réponse que le client préfère ; il ne garantit pas que le serveur les choisira.
+4. Repère `Content-Type` dans la réponse, s’il est présent. Il indique le type de média annoncé pour le contenu du message.
+5. Compare cet en-tête avec l’onglet **Réponse** (*Response*) ou **Aperçu** (*Preview*), si le navigateur en propose un. Observe que la métadonnée et le contenu sont deux éléments distincts.
+6. Note une chose que l’en-tête permet d’observer et une conclusion qu’il ne suffit pas à établir.
+
+</Instructions>
+
+<Indice niveau={1} titre="Regarde de quel côté vient l’en-tête">
+
+Les en-têtes sont attachés à une requête ou à une réponse. Dans les DevTools, les sections sont généralement séparées.
+
+</Indice>
+
+<Indice niveau={2} titre="Compare deux noms familiers">
+
+`Accept` est souvent envoyé par le client pour indiquer ses préférences de formats. `Content-Type` décrit le type du corps du message auquel il est associé. Leur présence et leur valeur dépendent de l’échange.
+
+</Indice>
+
+<Exercice id="exercice" titre="Interprète sans surinterpréter">
+
+Pour une réponse qui contient `Content-Type: application/json`, écris ce que ce champ annonce, puis cite deux choses qu’il ne prouve pas à lui seul.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Le champ annonce que le corps de la réponse est présenté comme du JSON. Il ne prouve pas à lui seul que le corps est un JSON valide, que ses données sont correctes, ni qu’elles correspondent au besoin de l’utilisateur. Pour vérifier la syntaxe, il faut examiner ou analyser le corps ; pour vérifier le sens métier, il faut d’autres éléments.
+
+</Indice>
+
+</Exercice>

@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'Événements et hooks',
+  verification: { aiReviewed: true, humanValidated: false, references: ['Node.js: Events', 'Django: Signals'] },
+}
+
+# Événements et hooks
+
+Un événement signale qu’un fait s’est produit ; un hook est souvent un point d’extension auquel du code peut se rattacher pendant un cycle défini. Ces termes ne désignent pas partout le même mécanisme.
+
+<Pourquoi id="pourquoi">
+
+Après la création d’une recette, Aïcha voudrait envoyer une notification. Si l’envoi est ajouté directement dans le handler HTTP, d’autres chemins de création risquent de l’oublier. Elle cherche un moyen de réagir au fait « recette créée » sans confondre ce mécanisme avec l’injection des services.
+
+Un événement peut découpler l’émetteur d’un fait des réactions à ce fait. Un hook peut permettre d’intervenir à un moment défini du cycle d’un framework ou d’un objet. Ils ne garantissent ni l’exécution asynchrone, ni la livraison durable, ni une unique exécution : cela dépend de l’implémentation.
+
+</Pourquoi>
+
+<ParcoursMini zone="transversal" etape="Un fait déclenche un point de réaction" />
+
+<Instructions id="instructions">
+
+1. Dans un projet d’exemple, repère un événement émis après une action métier, ou un hook documenté par le framework.
+2. Note le fait ou le moment qui déclenche le code.
+3. Repère qui émet le signal et quel code y réagit.
+4. Vérifie si le traitement est synchrone, asynchrone ou mis en file d’attente ; ne le déduis pas du seul mot « event ».
+5. Compare ce mécanisme au constructeur ou au câblage qui fournit les services : un point de réaction dans le cycle n’est pas une injection de dépendances.
+
+</Instructions>
+
+<Indice niveau={1} titre="Cherche le déclencheur">
+
+Demande-toi quel fait ou quel moment du cycle précède l’exécution du code observé.
+
+</Indice>
+
+<Indice niveau={2} titre="Sépare signal et câblage">
+
+Un événement/hooks permet de réagir à un fait ou à un moment. L’injection de dépendances fournit des objets dont un composant a besoin ; les deux peuvent coexister sans être le même mécanisme.
+
+</Indice>
+
+<Exercice id="exercice" titre="Classe deux mécanismes">
+
+Dans un exemple, un service est fourni au constructeur d’un contrôleur, et un listener reçoit `RecipeCreated`. Identifie lequel relève de l’injection et lequel réagit à un événement.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Le service fourni au constructeur est une dépendance injectée. Le listener qui reçoit `RecipeCreated` réagit à un événement. Le moment d’exécution, la fiabilité et l’ordre de ces opérations dépendent de l’outil et de sa configuration.
+
+</Indice>
+
+</Exercice>

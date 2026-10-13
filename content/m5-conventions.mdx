@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'Choisir des conventions utiles',
+  verification: { aiReviewed: true, humanValidated: false, references: ['Google: Engineering Practices Documentation', 'Prettier: Options'] },
+}
+
+# Choisir des conventions utiles
+
+Une convention est un accord partagé sur la façon de nommer ou structurer le code. Elle aide les personnes à naviguer le projet ; une convention ne rend pas un choix correct par elle-même.
+
+<Pourquoi id="pourquoi">
+
+Quand Clara veut comprendre comment une recette est enregistrée, elle trouve un fichier `recipeService.ts`, un autre `RecipeManager.ts` et une fonction `save_food`. Les noms ne lui permettent pas de savoir si ces éléments ont le même rôle.
+
+Des conventions cohérentes réduisent le coût de lecture et rendent les différences significatives plus visibles. Le meilleur ensemble dépend de l’équipe, du langage et des outils déjà utilisés. Automatiser formatage et vérifications simples évite de transformer chaque revue en débat d’espaces ou de guillemets.
+
+</Pourquoi>
+
+<ParcoursMini zone="transversal" etape="Les conventions rendent les rôles plus faciles à retrouver" />
+
+<Instructions id="instructions">
+
+1. Dans un dépôt que tu peux consulter, cherche plusieurs exemples d’une même chose, comme des fonctions de service ou des tests.
+2. Note les différences de nommage, d’emplacement ou de formatage qui rendent la recherche difficile.
+3. Choisis une seule convention à clarifier, par exemple le suffixe des fichiers de tests ou la forme des noms de composants.
+4. Vérifie si un outil du projet peut appliquer cette convention automatiquement avant d’ajouter une nouvelle règle.
+5. Applique la convention au nouvel exemple ou à une petite zone existante, puis vérifie que cela améliore réellement la recherche et la lecture.
+
+</Instructions>
+
+<Indice niveau={1} titre="Cherche les répétitions">
+
+Une convention est plus utile lorsqu’elle clarifie une famille d’éléments que les personnes cherchent souvent.
+
+</Indice>
+
+<Indice niveau={2} titre="Automatise ce qui est mécanique">
+
+Formatage et certaines règles de style peuvent être vérifiés par des outils. Garde la revue humaine pour les choix de conception et la clarté du comportement.
+
+</Indice>
+
+<Exercice id="exercice" titre="Écris une convention testable">
+
+Propose une convention de nommage des fichiers de tests pour ce projet et indique comment une personne peut vérifier qu’un nouveau test la respecte.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Exemple : « Les tests unitaires d’un module sont nommés `<module>.test.ts` et placés près du module. » On peut le vérifier en regardant le chemin et le nom du prochain test, ou automatiser cette règle si l’outil du projet le permet. C’est un choix d’équipe, pas une exigence de TypeScript.
+
+</Indice>
+
+</Exercice>

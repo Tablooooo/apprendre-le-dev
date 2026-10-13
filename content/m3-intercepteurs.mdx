@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'Intercepteurs : entourer les échanges',
+  verification: { aiReviewed: true, humanValidated: false, references: ['Axios: Interceptors', 'Angular: HTTP interceptors'] },
+}
+
+# Intercepteurs : entourer les échanges
+
+Un intercepteur est un mécanisme proposé par certains clients HTTP ou frameworks pour exécuter du code autour de requêtes ou de réponses. Il ne fait pas partie de l’API `fetch` de base sous la forme d’un intercepteur global intégré.
+
+<Pourquoi id="pourquoi">
+
+À chaque chargement d’une page du tableau de bord, Léon voit le code ajouter un en-tête de langue avant l’appel API. Il trouve la même logique copiée dans plusieurs fonctions et craint qu’une requête l’oublie.
+
+Un intercepteur fourni par une bibliothèque HTTP peut centraliser certains traitements transversaux, par exemple ajouter un en-tête ou journaliser une réponse. Son fonctionnement, son ordre d’exécution et sa portée dépendent de la bibliothèque. Avec `fetch` natif, on peut créer une fonction enveloppe, mais ce n’est pas la même API qu’un intercepteur intégré.
+
+</Pourquoi>
+
+<ParcoursMini zone="http" etape="Un traitement s’insère autour des appels HTTP" />
+
+<Instructions id="instructions">
+
+1. Dans un projet qui utilise un client HTTP avec intercepteurs, repère où ils sont enregistrés.
+2. Identifie s’ils interviennent avant l’envoi de la requête, après la réponse, ou dans les deux phases.
+3. Repère la modification concrète effectuée, par exemple un en-tête ajouté, sans copier ou afficher un secret.
+4. Vérifie quelle instance ou quel client est concerné ; un intercepteur peut ne s’appliquer qu’à certains appels.
+5. Si le projet utilise `fetch` natif, cherche plutôt une fonction enveloppe ou un helper et ne l’appelle pas automatiquement « intercepteur natif ».
+
+</Instructions>
+
+<Indice niveau={1} titre="Cherche où le client est configuré">
+
+Les intercepteurs sont souvent enregistrés quand on crée ou configure une instance de client HTTP.
+
+</Indice>
+
+<Indice niveau={2} titre="Demande-toi quand le code s’exécute">
+
+Un traitement avant l’envoi transforme ou observe la requête ; un traitement après peut examiner la réponse. Le détail dépend de la bibliothèque.
+
+</Indice>
+
+<Exercice id="exercice" titre="Distingue intercepteur et appel HTTP">
+
+Une bibliothèque applique automatiquement un en-tête à chaque requête d’une instance configurée. Une fonction séparée appelle `fetch('/api/recettes')`. Identifie le rôle de chacune et cite une limite possible de l’intercepteur.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Le code qui ajoute l’en-tête autour des requêtes est un intercepteur si la bibliothèque propose et configure ce mécanisme. La fonction qui appelle `fetch` réalise l’échange HTTP. L’intercepteur peut ne couvrir que les requêtes de l’instance concernée ; un appel `fetch` séparé peut ne pas passer par lui.
+
+</Indice>
+
+</Exercice>

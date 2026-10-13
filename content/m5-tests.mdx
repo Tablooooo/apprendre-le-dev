@@ -1,0 +1,53 @@
+export const metadata = {
+  title: 'Tester le comportement attendu',
+  verification: { aiReviewed: true, humanValidated: false, references: ['Vitest: Writing Tests', 'Martin Fowler: Test Pyramid'] },
+}
+
+# Tester le comportement attendu
+
+Un test vérifie une attente observable dans un contexte donné. Les tests peuvent porter sur une fonction isolée, l’intégration de plusieurs composants ou un parcours complet ; chaque niveau apporte des preuves différentes.
+
+<Pourquoi id="pourquoi">
+
+Après un changement du calcul de temps de cuisson, Rémi découvre que les recettes sans durée affichent maintenant `NaN`. La page semblait correcte avec les exemples habituels. Il veut vérifier ce comportement avant qu’une autre modification ne le réintroduise.
+
+Un test ciblé peut décrire une entrée et le résultat attendu, puis être relancé après des changements. Un test qui passe augmente la confiance sur ce scénario précis ; il ne prouve pas l’absence de tous les bugs ni la correction de chaque couche non testée.
+
+</Pourquoi>
+
+<ParcoursMini zone="serveur" etape="Un comportement est vérifié à une frontière choisie" />
+
+<Instructions id="instructions">
+
+1. Choisis un comportement observable du projet, par exemple le calcul du temps total quand une recette n’a pas de durée de cuisson.
+2. Écris le cas limite sous forme d’entrée, d’action et de résultat attendu.
+3. Dans le framework de test du projet, écris un test automatisé minimal qui exprime cette attente.
+4. Lance d’abord le test dans le cas normal, puis avec le cas limite. Ne remplace pas l’assertion par une simple vérification que le code ne plante pas.
+5. Modifie temporairement le calcul dans une branche locale de test ou inspecte le comportement avant correction afin de confirmer que le test échoue quand le résultat est faux.
+6. Lance la suite pertinente après la correction et note ce que cette suite ne couvre pas.
+
+</Instructions>
+
+<Indice niveau={1} titre="Décris ce que la personne devrait voir">
+
+Un bon point de départ est une entrée concrète et une sortie attendue, surtout pour le cas qui a échoué.
+
+</Indice>
+
+<Indice niveau={2} titre="Le test doit distinguer le bon du mauvais résultat">
+
+Une assertion sur la valeur attendue est plus informative qu’un test qui se contente de confirmer que la fonction s’exécute.
+
+</Indice>
+
+<Exercice id="exercice" titre="Écris un cas de test sur une valeur absente">
+
+Pour une fonction qui calcule un temps total, propose un cas où `tempsCuisson` est absent, la règle attendue et une assertion exprimant ce résultat.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Si l’application traite une durée absente comme zéro, on peut donner une recette dont `tempsCuisson` vaut `undefined` et vérifier que le total égale le temps de préparation, sans devenir `NaN`. La règle exacte doit venir du besoin produit : un test doit documenter le comportement décidé, pas inventer cette règle.
+
+</Indice>
+
+</Exercice>

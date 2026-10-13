@@ -1,0 +1,6 @@
+import Link from 'next/link'
+import type { Lesson } from '../data/curriculum'
+
+export function PlannedLesson({ lesson, moduleTitle, prerequisiteTitles, zone }: { lesson: Lesson; moduleTitle: string; prerequisiteTitles: string[]; zone: string }) {
+  return <article className="planned-page"><div className="lesson-breadcrumb"><Link href="/">Mon parcours</Link><span>/</span><span>{moduleTitle}</span></div><span className="lesson-module-tag">MODULE {String(Number(lesson.moduleId.slice(1))).padStart(2, '0')}</span><h1>{lesson.title}</h1><p className="planned-summary">{lesson.summary}</p><div className="planned-state"><span className="planned-state-mark">↗</span><div><strong>Cette leçon est au programme.</strong><p>Son contenu sera publié dans une prochaine étape. La roadmap te montre où elle s’insère.</p></div></div><dl className="planned-details"><div><dt>Module</dt><dd>{moduleTitle}</dd></div><div><dt>Dans le parcours</dt><dd>{zone}</dd></div><div><dt>Durée prévue</dt><dd>{lesson.duration} min</dd></div><div><dt>Prérequis</dt><dd>{prerequisiteTitles.length ? prerequisiteTitles.join(', ') : 'Aucun'}</dd></div></dl><Link className="button button-dark" href="/#roadmap">Retour à la roadmap <span aria-hidden="true">→</span></Link></article>
+}

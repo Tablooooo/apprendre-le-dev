@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'Où garder un jeton ?',
+  verification: { aiReviewed: true, humanValidated: false, references: ['OWASP: HTML5 Security Cheat Sheet', 'OWASP: Session Management Cheat Sheet', 'MDN: Set-Cookie'] },
+}
+
+# Où garder un jeton ?
+
+Le stockage d’un secret côté navigateur est un choix de sécurité avec des compromis. Il n’existe pas d’emplacement qui rende un jeton automatiquement sûr dans tous les scénarios.
+
+<Pourquoi id="pourquoi">
+
+Émile suit un tutoriel qui stocke un jeton d’authentification dans `localStorage`. Plus tard, il lit qu’un script exécuté dans la page peut accéder à cette valeur. Il veut comprendre le risque et comparer ce choix avec un cookie configuré côté serveur.
+
+Un script malveillant exécuté dans l’origine de la page peut lire les données accessibles à JavaScript, notamment celles de `localStorage`. Un cookie `HttpOnly` n’est pas lisible par JavaScript, mais le navigateur peut l’envoyer automatiquement avec des requêtes, ce qui introduit notamment des considérations CSRF selon le contexte et les protections utilisées. Le choix dépend de l’architecture ; aucun mécanisme ne remplace la prévention XSS, les protections CSRF adaptées, TLS et une gestion de session correcte.
+
+</Pourquoi>
+
+<ParcoursMini zone="navigateur" etape="Le navigateur conserve ou transmet un secret selon sa configuration" />
+
+<Instructions id="instructions">
+
+1. Dans un projet de test, repère où l’application conserve l’état d’authentification : mémoire, stockage Web, cookie ou autre mécanisme documenté.
+2. Vérifie les attributs d’un cookie de test sans lire ni copier sa valeur : `HttpOnly`, `Secure`, `SameSite`, durée et portée.
+3. Pour le stockage Web, identifie les scripts de l’application qui peuvent accéder à l’origine ; ne mets pas de jeton réel dans un exemple d’apprentissage.
+4. Décris le scénario de menace considéré, comme un script injecté ou une requête intersite, au lieu de classer un stockage comme « sûr » sans contexte.
+5. Consulte la recommandation de sécurité et l’architecture du projet avant de modifier un mécanisme réel.
+
+</Instructions>
+
+<Indice niveau={1} titre="Demande-toi qui peut lire la valeur">
+
+`localStorage` et `sessionStorage` sont accessibles au JavaScript exécuté dans l’origine. `HttpOnly` empêche la lecture d’un cookie par JavaScript, pas son envoi automatique par le navigateur.
+
+</Indice>
+
+<Indice niveau={2} titre="Compare les risques, pas seulement les emplacements">
+
+Le stockage accessible à JavaScript est exposé en cas de XSS. Les cookies automatiques demandent une réflexion sur CSRF et leurs attributs. La protection dépend aussi du reste de l’application.
+
+</Indice>
+
+<Exercice id="exercice" titre="Évalue un choix de stockage fictif">
+
+Un exemple pédagogique conserve un jeton dans `localStorage`. Nomme un risque si un script malveillant s’exécute dans l’origine et une mesure de défense qui ne dépend pas uniquement du choix de stockage.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Un script injecté peut lire le jeton et potentiellement l’exfiltrer. Réduire les risques XSS (encodage contextuel, éviter les injections HTML dangereuses, CSP adaptée, dépendances maîtrisées) est une défense importante. La décision de stockage reste à prendre selon l’architecture ; déplacer le jeton vers un cookie demande aussi des protections CSRF appropriées.
+
+</Indice>
+
+</Exercice>

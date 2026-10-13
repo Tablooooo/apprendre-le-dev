@@ -1,0 +1,53 @@
+export const metadata = {
+  title: 'Inscription : envoyer des données',
+  verification: { aiReviewed: true, humanValidated: false, references: ['MDN: HTTP messages', 'MDN: Using Fetch'] },
+}
+
+# Inscription : envoyer des données
+
+Lors d’une inscription, le navigateur envoie les champs saisis ; une réponse revient ensuite. Observer cette frontière aide à séparer les données envoyées de la décision du serveur.
+
+<Pourquoi id="pourquoi">
+
+Camille remplit un formulaire avec son adresse e-mail et un mot de passe, puis clique sur « Créer mon compte ». La page reste immobile. Elle veut savoir si les valeurs sont parties, si une réponse est revenue ou si le clic n’a déclenché aucune requête.
+
+Suivre la requête d’inscription permet de repérer ce qui quitte le navigateur et le résultat HTTP reçu. Les outils de développement ne révèlent pas automatiquement le traitement interne ni l’écriture dans la base de données.
+
+</Pourquoi>
+
+<ParcoursMini zone="http" etape="Le formulaire devient une requête" />
+
+<Instructions id="instructions">
+
+1. Ouvre une page de formulaire de démonstration ou un formulaire de test que tu es autorisé à utiliser. N’envoie pas de vrais identifiants.
+2. Ouvre les outils de développement et l’onglet **Réseau** (*Network*). Active « Conserver le journal » si l’option existe.
+3. Remplis les champs avec des valeurs fictives et envoie le formulaire une seule fois.
+4. Repère la requête qui suit l’envoi. Note son URL, sa méthode, son statut et son type de ressource.
+5. Si les DevTools affichent un corps de requête (*Payload*), observe seulement les noms de champs et les valeurs fictives. Ne copie ni ne partage de données personnelles.
+6. Observe la réponse si elle est disponible. Note ce qui est visible, puis une chose que l’échange ne te permet pas d’affirmer sur la base de données.
+
+</Instructions>
+
+<Indice niveau={1} titre="Commence par le moment du clic">
+
+Garde l’onglet Réseau ouvert avant d’envoyer le formulaire ; la requête apparaît au moment de la soumission.
+
+</Indice>
+
+<Indice niveau={2} titre="Sépare ce qui part et ce qui revient">
+
+La méthode, les en-têtes de requête et un éventuel corps appartiennent à la demande. Le statut, les en-têtes de réponse et son éventuel corps appartiennent à la réponse.
+
+</Indice>
+
+<Exercice id="exercice" titre="Décris l’envoi sans inventer la suite">
+
+À partir d’une requête d’inscription observée avec des données fictives, note la méthode, le statut de réponse et si un corps de requête est visible. Écris une phrase sur ce que tu ne peux pas conclure au sujet du stockage.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Une observation possible est : « Le navigateur a envoyé une requête `POST` et a reçu un statut `201`. Le corps de requête affiché contient les champs fictifs saisis. » Cela ne prouve pas à lui seul qu’une ligne a été écrite dans une base de données : le serveur peut appliquer d’autres traitements, et les DevTools n’exposent pas automatiquement son stockage interne. Les valeurs et le statut réels dépendent du site testé.
+
+</Indice>
+
+</Exercice>

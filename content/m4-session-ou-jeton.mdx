@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'Session ou jeton ?',
+  verification: { aiReviewed: true, humanValidated: false, references: ['OWASP: Session Management Cheat Sheet', 'MDN: HTTP cookies'] },
+}
+
+# Session ou jeton ?
+
+Une session et un jeton sont deux façons de représenter ou transporter des informations d’authentification, mais ce ne sont pas des synonymes. Les détails du mécanisme dépendent du système.
+
+<Pourquoi id="pourquoi">
+
+Nadia se connecte au site de son cours, puis ouvre une nouvelle page dans le même navigateur. Elle reste connectée. Elle se demande si le navigateur garde un « jeton » ou si le serveur se souvient de sa connexion d’une autre façon.
+
+Distinguer session et jeton permet de décrire où se trouve l’état d’authentification et ce qui accompagne une requête. Dans un modèle courant, le serveur garde l’état de session et le navigateur transmet un identifiant opaque, souvent dans un cookie. Un jeton peut au contraire transporter des claims ou servir de preuve selon un protocole. Les systèmes réels peuvent combiner plusieurs mécanismes.
+
+</Pourquoi>
+
+<ParcoursMini zone="transversal" etape="La requête transporte un moyen de retrouver l’authentification" />
+
+<Instructions id="instructions">
+
+1. Utilise un compte de démonstration autorisé et ouvre les DevTools avant de te connecter. Ne copie ni ne partage de cookie ou jeton.
+2. Dans l’onglet **Réseau** (*Network*), observe une requête après connexion et repère si le navigateur envoie des cookies, sans révéler leur valeur.
+3. Dans les outils de stockage du navigateur, observe seulement les noms et attributs utiles, comme `HttpOnly`, `Secure` ou `SameSite` ; ne copie pas de valeur de session.
+4. Compare cette observation à la documentation publique de l’application si elle décrit son mécanisme.
+5. Note ce qui est établi par tes observations et ce qui reste inconnu côté serveur.
+
+</Instructions>
+
+<Indice niveau={1} titre="N’ouvre pas la valeur secrète">
+
+Tu peux observer qu’un cookie est envoyé sans copier son contenu.
+
+</Indice>
+
+<Indice niveau={2} titre="État serveur et jeton ne sont pas interchangeables">
+
+Un identifiant de session peut référencer un état conservé côté serveur. Un jeton peut contenir des informations ou être vérifié selon un format/protocole. Mais le nom d’un cookie ne suffit pas à déterminer lequel est utilisé.
+
+</Indice>
+
+<Exercice id="exercice" titre="Décris un mécanisme sans dévoiler de secret">
+
+À partir d’un environnement de test documenté, écris si tu observes un cookie transmis après connexion et quelle information manque pour conclure si l’état est conservé côté serveur ou dans un jeton.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Exemple : « Une requête inclut un cookie marqué `HttpOnly` et `Secure`. Je peux constater sa transmission, mais pas déduire la structure ou la validation côté serveur sans documentation ou accès au code. Je ne copie pas sa valeur, car elle peut permettre d’agir au nom de la session. » Les attributs et le mécanisme dépendent du site.
+
+</Indice>
+
+</Exercice>

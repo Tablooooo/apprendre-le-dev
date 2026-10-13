@@ -1,0 +1,53 @@
+export const metadata = {
+  title: 'Créer une recette',
+  verification: { aiReviewed: true, humanValidated: false, references: ['MDN: HTTP request methods', 'MDN: HTTP response status codes'] },
+}
+
+# Créer une recette
+
+Créer une donnée dans une application commence souvent par une action de l’interface qui envoie des informations. Seule l’observation côté client ne prouve pas comment ni où le serveur les conserve.
+
+<Pourquoi id="pourquoi">
+
+Sofia saisit le titre et les ingrédients de sa nouvelle recette, puis choisit « Enregistrer ». La page revient à sa liste et affiche la recette. Elle veut comprendre quel échange a accompagné cette action, sans confondre l’affichage avec une preuve d’écriture en base.
+
+Observer une création aide à repérer les données envoyées et la réponse reçue. Le client peut confirmer l’action selon son interface, mais le stockage et les règles métier s’exécutent dans le système serveur, auxquels les DevTools ne donnent pas automatiquement accès.
+
+</Pourquoi>
+
+<ParcoursMini zone="http" etape="Les données partent, la réponse confirme ou refuse" />
+
+<Instructions id="instructions">
+
+1. Utilise une application de recettes de démonstration, un environnement local ou un espace où tu es autorisé à créer une donnée.
+2. Ouvre les outils de développement puis **Réseau** (*Network*). Utilise seulement du contenu fictif.
+3. Crée une recette de test et observe la requête déclenchée lors de l’enregistrement.
+4. Repère la méthode, l’URL, le statut de la réponse et, si visible, la forme générale du corps envoyé. Ne partage pas de données privées.
+5. Compare le résultat affiché à la réponse reçue, si un corps de réponse est disponible.
+6. Décris ce que tu as observé et distingue-le d’une affirmation sur la persistance effective des données.
+
+</Instructions>
+
+<Indice niveau={1} titre="Observe la requête déclenchée par Enregistrer">
+
+Garde l’onglet Réseau ouvert avant de cliquer et regarde la nouvelle ligne qui apparaît.
+
+</Indice>
+
+<Indice niveau={2} titre="Le statut ne raconte pas toute l’histoire métier">
+
+Un statut `201 Created` est associé à une création dans la sémantique HTTP. Mais un statut observé depuis le navigateur ne révèle pas à lui seul le système de persistance ni toutes les règles exécutées.
+
+</Indice>
+
+<Exercice id="exercice" titre="Décris la création de ta recette de test">
+
+Avec une donnée fictive, relève la méthode et le statut. Écris une phrase qui distingue le résultat HTTP observé de la façon dont les données sont conservées.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Exemple : « Le navigateur a envoyé `POST /recettes` et a reçu `201 Created`. La réponse affiche l’identifiant et le titre de la recette. » On peut dire que la réponse indique une création au sens HTTP ; on ne peut pas déduire de ces seules observations si le serveur a utilisé une base relationnelle, un autre stockage ou un cache.
+
+</Indice>
+
+</Exercice>

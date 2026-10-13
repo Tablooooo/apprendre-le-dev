@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'Pourquoi valider aussi côté serveur',
+  verification: { aiReviewed: true, humanValidated: false, references: ['OWASP: Input Validation Cheat Sheet', 'MDN: Constraint validation'] },
+}
+
+# Pourquoi valider aussi côté serveur
+
+La validation côté client améliore le retour immédiat dans l’interface. La validation côté serveur protège les règles et les données, car le serveur ne peut pas supposer que chaque client applique l’interface attendue.
+
+<Pourquoi id="pourquoi">
+
+L’application de recettes empêche Léa d’envoyer un formulaire vide grâce à son navigateur. Un autre client envoie ensuite une requête sans titre ; la donnée arrive quand même à l’API. Léa cherche à comprendre pourquoi la vérification du formulaire n’a pas suffi.
+
+Le navigateur peut être modifié, contourné ou remplacé par un autre programme. Le serveur doit donc vérifier les entrées avant de les utiliser, même si le client fait aussi une validation conviviale. Les règles exactes dépendent des besoins métier ; une validation ne remplace pas l’autorisation d’accès.
+
+</Pourquoi>
+
+<ParcoursMini zone="serveur" etape="Les entrées sont revalidées à la frontière serveur" />
+
+<Instructions id="instructions">
+
+1. Dans une application d’apprentissage, repère la validation de formulaire côté client et note le message présenté à la personne.
+2. Repère la frontière API qui reçoit les mêmes données.
+3. Cherche les contrôles effectués côté serveur avant le traitement métier ou l’écriture.
+4. Compare les deux ensembles de règles : les messages et le moment peuvent différer, mais le serveur applique les contraintes nécessaires.
+5. Distingue validation des données et autorisation : une donnée bien formée ne prouve pas que la personne peut effectuer l’action.
+
+</Instructions>
+
+<Indice niveau={1} titre="Un client n’est pas une frontière de confiance">
+
+Le serveur reçoit aussi des requêtes de programmes qui n’utilisent pas ton formulaire.
+
+</Indice>
+
+<Indice niveau={2} titre="Validation et autorisation répondent à des questions différentes">
+
+La validation demande si les données ont la forme ou les valeurs attendues. L’autorisation demande si cette personne peut effectuer cette action sur cette ressource.
+
+</Indice>
+
+<Exercice id="exercice" titre="Classe les contrôles">
+
+Pour une création de recette, classe ces contrôles : « le titre n’est pas vide », « la personne est propriétaire du brouillon », « le temps est un nombre positif ». Indique lesquels doivent être contrôlés côté serveur.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Le titre non vide et le temps positif sont des validations d’entrée. La propriété du brouillon est une règle d’autorisation (et peut aussi dépendre d’une règle métier). Les contrôles qui protègent les données ou l’accès doivent être effectués côté serveur ; le client peut les anticiper pour améliorer l’expérience mais ne fait pas autorité.
+
+</Indice>
+
+</Exercice>

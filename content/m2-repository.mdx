@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'Lire et enregistrer avec un repository',
+  verification: { aiReviewed: true, humanValidated: false, references: ['Martin Fowler: Repository pattern', 'Microsoft: Repository pattern'] },
+}
+
+# Lire et enregistrer avec un repository
+
+Un repository (dépôt) est un motif d’organisation qui présente une interface de lecture et d’écriture de données au reste de l’application. Il n’est ni la base de données elle-même ni une fonction normalisée par HTTP.
+
+<Pourquoi id="pourquoi">
+
+Éva veut afficher ses recettes. Son service appelle directement plusieurs requêtes SQL, tandis que le handler d’une autre route en écrit une. Quand la structure des données change, elle ne sait plus quels endroits modifier.
+
+Une couche repository peut regrouper les opérations d’accès aux données derrière une interface centrée sur le domaine. Cela facilite la lecture du flux et peut isoler le reste de l’application des détails de persistance. Certaines applications n’emploient pas ce motif ; son nom ne garantit ni une base particulière ni une abstraction toujours utile.
+
+</Pourquoi>
+
+<ParcoursMini zone="bdd" etape="Le service délègue l’accès aux données" />
+
+<Instructions id="instructions">
+
+1. Dans un projet de démonstration, pars d’une opération métier qui lit ou enregistre une recette.
+2. Suis les appels jusqu’au code qui interagit avec la source de données.
+3. Cherche une interface ou un module qui propose des opérations nommées selon le domaine, par exemple `trouverParId` ou `enregistrer`.
+4. Note si cette couche cache réellement le détail de la source de données ou si elle expose directement des requêtes spécifiques.
+5. Décris les faits du projet observé ; n’appelle pas automatiquement « repository » toute fonction qui lit une base.
+
+</Instructions>
+
+<Indice niveau={1} titre="Suis la donnée vers le stockage">
+
+Pars de l’action appelée par le service et suis la chaîne jusqu’au code d’accès aux données.
+
+</Indice>
+
+<Indice niveau={2} titre="Repère l’interface de domaine">
+
+Un repository est souvent repérable par des opérations telles que retrouver, lister ou enregistrer des objets du domaine, mais le motif n’est pas défini par le nom seul.
+
+</Indice>
+
+<Exercice id="exercice" titre="Trace une lecture de recette">
+
+Dessine ou écris la chaîne observée entre la requête HTTP et la source de données. Indique à quel endroit un repository intervient, s’il existe dans l’exemple.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Une chaîne possible est : requête → route/contrôleur → service → repository → source de données. Le repository n’est présent que si le projet l’implémente comme couche identifiable. D’autres architectures peuvent accéder aux données différemment.
+
+</Indice>
+
+</Exercice>

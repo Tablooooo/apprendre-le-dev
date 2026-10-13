@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'Composants : construire l’interface',
+  verification: { aiReviewed: true, humanValidated: false, references: ['React: Your First Component', 'React: Passing Props to a Component'] },
+}
+
+# Composants : construire l’interface
+
+Un composant est une partie d’interface réutilisable. En React, c’est couramment une fonction qui retourne des éléments React ; d’autres bibliothèques peuvent définir le terme différemment.
+
+<Pourquoi id="pourquoi">
+
+Maya conçoit une page de recettes où chaque élément doit montrer un titre, une durée et une image. Elle copie trois fois le même bloc d’affichage. Quand elle veut corriger la façon de présenter la durée, elle doit retrouver toutes les copies et risque d’en oublier une.
+
+Un composant permet de donner un nom à une partie d’interface et de la réutiliser avec des données différentes. Cela aide Maya à faire évoluer un motif d’affichage à un seul endroit. Un composant ne rend pas les données automatiquement partagées : les valeurs qu’il reçoit dépendent de son parent et de ses propriétés.
+
+</Pourquoi>
+
+<ParcoursMini zone="navigateur" etape="Le navigateur assemble des composants d’interface" />
+
+<Instructions id="instructions">
+
+1. Sur une page de recettes que tu peux consulter, choisis un élément répété, comme une vignette de recette.
+2. Liste les morceaux visibles qui se répètent : titre, image, durée.
+3. Dans un exemple React, repère le composant qui représente cette vignette et les propriétés (*props*) qu’il reçoit.
+4. Trouve où plusieurs vignettes sont créées à partir des différentes recettes.
+5. Change une valeur d’entrée dans l’exemple et observe quelle partie de l’interface varie, sans confondre composant et donnée.
+
+</Instructions>
+
+<Indice niveau={1} titre="Cherche un motif répété">
+
+Repère des blocs visuellement semblables dont le contenu change d’une recette à l’autre.
+
+</Indice>
+
+<Indice niveau={2} titre="Suis les propriétés">
+
+En React, regarde les valeurs reçues par le composant puis l’endroit où elles sont utilisées dans le rendu.
+
+</Indice>
+
+<Exercice id="exercice" titre="Décris une vignette réutilisable">
+
+Imagine une vignette de recette avec titre et durée. Indique quelles données elle reçoit et quelle partie de son affichage peut être réutilisée pour plusieurs recettes.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+La vignette peut recevoir `titre` et `duree` en propriétés, puis afficher ces valeurs dans une structure commune. Chaque recette fournit des valeurs différentes, tandis que la forme de la vignette reste réutilisée. En React, les props sont des entrées du composant, pas un stockage partagé modifiable par celui-ci.
+
+</Indice>
+
+</Exercice>

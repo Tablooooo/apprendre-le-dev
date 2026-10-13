@@ -1,0 +1,54 @@
+export const metadata = {
+  title: 'Observer une requête dans les DevTools',
+  verification: { aiReviewed: true, humanValidated: false, references: ['Chrome DevTools: Network panel', 'MDN: Network request details'] },
+}
+
+# Observer une requête dans les DevTools
+
+Les DevTools affichent des détails de requêtes observés par le navigateur. Ils sont utiles pour enquêter, mais ne montrent pas automatiquement ce que le serveur fait après réception.
+
+<Pourquoi id="pourquoi">
+
+Anaïs suit un tutoriel qui dit « regarde la requête API ». Elle ouvre les outils de développement mais voit des dizaines de lignes : documents, images, polices, scripts et appels de données. Elle ne sait pas laquelle correspond au clic qu’elle vient de faire.
+
+Une méthode d’observation répétable aide Anaïs à isoler l’échange qui l’intéresse et à décrire les faits sans confondre une hypothèse avec une preuve. Elle peut relier un clic à une requête si elle observe le bon intervalle et tient compte des requêtes concurrentes.
+
+</Pourquoi>
+
+<ParcoursMini zone="http" etape="Observer la demande et la réponse" />
+
+<Instructions id="instructions">
+
+1. Ouvre les outils de développement avant l’action que tu veux observer, puis choisis **Réseau** (*Network*).
+2. Efface la liste existante avec le bouton prévu par le navigateur. La formulation varie selon l’outil.
+3. Si besoin, active « Conserver le journal » (*Preserve log*) et filtre sur **Fetch/XHR** pour réduire le bruit. Ce filtre ne garantit pas que toutes les requêtes pertinentes sont de ce type.
+4. Effectue une seule action observable, comme ouvrir une liste de démonstration.
+5. Repère les lignes apparues à ce moment, puis sélectionne celle dont l’URL, le type et le timing correspondent le mieux à l’action. Ce lien reste une hypothèse à confirmer.
+6. Examine méthode, URL, statut, en-têtes et réponse disponible. Note séparément les observations et tes interprétations.
+7. Indique une chose qu’on ne peut pas conclure sans accès serveur, par exemple le nombre exact de requêtes SQL exécutées.
+
+</Instructions>
+
+<Indice niveau={1} titre="Réduis le bruit avant l’action">
+
+Efface les anciennes lignes, puis déclenche une seule action pour que les nouvelles requêtes soient plus faciles à repérer.
+
+</Indice>
+
+<Indice niveau={2} titre="Utilise plusieurs indices, pas seulement le nom">
+
+Compare le moment d’apparition, le type, l’URL et la méthode. Le nom d’une requête ne suffit pas toujours à établir sa fonction.
+
+</Indice>
+
+<Exercice id="exercice" titre="Fais une observation reproductible">
+
+Sur un site de démonstration, efface les requêtes, ouvre une liste, puis note une requête qui semble liée à cette action : méthode, URL et statut. Sépare les faits observés d’une hypothèse sur la couche serveur.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Exemple : « Après avoir ouvert la liste, une requête `GET /api/recettes` apparaît avec un statut `200`. Je suppose qu’elle contribue à l’affichage de la liste parce que son moment et son URL correspondent. Ces DevTools ne permettent pas de connaître le nombre de requêtes SQL ou le type de stockage côté serveur. » Les valeurs observées dépendent du site.
+
+</Indice>
+
+</Exercice>

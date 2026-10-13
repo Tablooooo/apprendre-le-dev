@@ -1,0 +1,53 @@
+export const metadata = {
+  title: 'Lire une liste depuis le serveur',
+  verification: { aiReviewed: true, humanValidated: false, references: ['MDN: HTTP messages', 'MDN: Fetch API'] },
+}
+
+# Lire une liste depuis le serveur
+
+Une interface peut demander une collection au serveur, recevoir une représentation et l’afficher. La liste visible n’explique pas à elle seule où les données sont conservées.
+
+<Pourquoi id="pourquoi">
+
+Inès ouvre la page de ses recettes enregistrées. La page affiche une roue de chargement, puis une liste de cinq recettes. Elle veut savoir quelle requête a permis de récupérer ces éléments et si l’interface affiche bien le contenu de la réponse.
+
+Suivre une lecture de liste permet de relier une demande HTTP à une réponse contenant éventuellement des données, puis à leur affichage. On peut observer la forme échangée, pas déduire le moteur de base de données ni le nombre de requêtes internes.
+
+</Pourquoi>
+
+<ParcoursMini zone="http" etape="Une demande de lecture, une collection en réponse" />
+
+<Instructions id="instructions">
+
+1. Ouvre une application de démonstration que tu peux consulter et les outils de développement.
+2. Dans **Réseau** (*Network*), filtre sur **Fetch/XHR** si le navigateur propose ce filtre.
+3. Recharge la page qui affiche une liste. Repère une requête qui semble liée aux éléments affichés ; son nom ou son URL donne un indice, pas une certitude.
+4. Sélectionne la requête et relève sa méthode et son statut de réponse.
+5. Ouvre **Réponse** (*Response*) ou **Aperçu** (*Preview*) si disponible. Repère si le corps contient des éléments qui correspondent à la liste affichée.
+6. Compare quelques valeurs non sensibles entre la réponse et l’interface. Note une limite de ce que cette comparaison permet d’affirmer.
+
+</Instructions>
+
+<Indice niveau={1} titre="Trouve les requêtes de données">
+
+Le filtre Fetch/XHR peut réduire la liste aux échanges initiés par les API du navigateur, mais les noms exacts varient selon le site.
+
+</Indice>
+
+<Indice niveau={2} titre="Relie l’élément affiché au corps reçu">
+
+Cherche un titre de recette visible dans l’interface et vois s’il apparaît aussi dans la réponse. Une correspondance donne un indice sur le lien entre réponse et affichage.
+
+</Indice>
+
+<Exercice id="exercice" titre="Compare une liste et sa réponse">
+
+Note la méthode, le statut et un élément affiché à la fois dans le corps de réponse et dans la page. Écris une chose qui reste inconnue après cette observation.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Exemple : « La requête de lecture utilise `GET`, sa réponse a le statut `200`, et la recette “Soupe de lentilles” apparaît dans le JSON ainsi que dans la page. » Cela n’établit pas si les données viennent d’une base, d’un cache ou d’une autre source, ni comment le serveur a produit la réponse.
+
+</Indice>
+
+</Exercice>

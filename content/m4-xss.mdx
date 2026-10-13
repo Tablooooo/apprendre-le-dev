@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'XSS : quand du contenu devient du code',
+  verification: { aiReviewed: true, humanValidated: false, references: ['OWASP: Cross Site Scripting Prevention Cheat Sheet', 'MDN: Cross-site scripting'] },
+}
+
+# XSS : quand du contenu devient du code
+
+Une XSS (cross-site scripting, script intersite) survient lorsqu’un contenu contrôlé par un attaquant est interprété comme du code actif dans une page d’une autre personne. Le type de XSS et les défenses dépendent du contexte.
+
+<Pourquoi id="pourquoi">
+
+Dans un forum de recettes, la description ajoutée par Paul apparaît avec une mise en forme inattendue sur l’écran de Léa. Elle se demande pourquoi du texte saisi par une personne peut modifier ce que le navigateur exécute.
+
+Une XSS peut apparaître quand des données non fiables sont insérées dans un contexte interprété sans traitement approprié. Le rendu textuel sûr, l’encodage adapté au contexte et des API qui évitent l’interprétation de HTML réduisent le risque. Une validation de chaîne ou un filtre générique ne suffit pas à sécuriser tous les contextes.
+
+</Pourquoi>
+
+<ParcoursMini zone="navigateur" etape="Le navigateur interprète le contenu reçu" />
+
+<Instructions id="instructions">
+
+1. Dans une application de démonstration conçue pour l’apprentissage, observe comment une description saisie apparaît dans une page.
+2. Repère si le contenu est rendu comme texte ou interprété comme HTML ; ne teste pas de charge active sur un site réel.
+3. Dans le code pédagogique, trouve le point où la donnée est insérée dans le DOM et identifie l’API utilisée.
+4. Vérifie si le framework échappe le texte par défaut et si une API d’injection HTML explicite est utilisée.
+5. Note une défense cohérente avec le contexte et pourquoi une CSP seule ne remplace pas un rendu sûr.
+
+</Instructions>
+
+<Indice niveau={1} titre="Le contexte de sortie compte">
+
+La même chaîne ne présente pas le même risque dans du texte brut, un attribut HTML, une URL ou du JavaScript.
+
+</Indice>
+
+<Indice niveau={2} titre="Préfère du texte à interpréter du HTML">
+
+Les API qui créent du texte plutôt que d’analyser une chaîne HTML réduisent cette classe de risque. Si du HTML riche est nécessaire, il doit être nettoyé avec une stratégie adaptée.
+
+</Indice>
+
+<Exercice id="exercice" titre="Choisis un rendu plus sûr">
+
+Un composant doit afficher la description textuelle d’une recette. Explique pourquoi l’insérer comme HTML brut est risqué et propose une approche plus sûre.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Traiter la description comme du texte, avec le rendu échappé par défaut du framework ou une API de texte, évite que le navigateur interprète les balises fournies comme du code. Si le produit accepte intentionnellement du HTML, il faut une sanitation adaptée et des tests ; une simple validation de longueur ne protège pas ce contexte.
+
+</Indice>
+
+</Exercice>

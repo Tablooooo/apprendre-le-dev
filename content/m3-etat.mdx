@@ -1,0 +1,53 @@
+export const metadata = {
+  title: 'État : quand l’interface évolue',
+  verification: { aiReviewed: true, humanValidated: false, references: ['React: State: A Component’s Memory', 'React: Updating Objects in State'] },
+}
+
+# État : quand l’interface évolue
+
+L’état (state) est une donnée conservée par une interface ou un composant afin que son rendu puisse évoluer au fil des interactions. La manière de le déclarer dépend de l’outil utilisé.
+
+<Pourquoi id="pourquoi">
+
+Après avoir cliqué sur le cœur d’une recette, Zoé veut voir immédiatement si elle est dans ses favoris. Si l’interface ne garde aucune information sur le clic et ne reçoit pas de nouvelle donnée du serveur, le cœur reste visuellement identique.
+
+Un état d’interface permet de représenter une valeur qui change, comme « favori sélectionné », et de recalculer l’affichage à partir de cette valeur. En React, une mise à jour de state demande un nouveau rendu du composant concerné ; elle ne signifie pas à elle seule que la modification a été enregistrée sur le serveur.
+
+</Pourquoi>
+
+<ParcoursMini zone="navigateur" etape="Une interaction fait évoluer l’état affiché" />
+
+<Instructions id="instructions">
+
+1. Ouvre un exemple interactif de favoris que tu peux tester sans compte ni données réelles.
+2. Observe l’apparence initiale du bouton favori.
+3. Clique une fois et observe ce qui change immédiatement dans l’interface.
+4. Recharge la page si l’exemple le permet. Note si la sélection est toujours présente ou non.
+5. Dans un exemple React, trouve l’état qui représente la sélection et la fonction appelée au clic.
+6. Sépare ce qui s’est passé localement dans l’interface de ce qui pourrait nécessiter une requête au serveur pour persister la donnée.
+
+</Instructions>
+
+<Indice niveau={1} titre="Observe avant et après le clic">
+
+L’état d’interface est une valeur dont la modification correspond au changement visible.
+
+</Indice>
+
+<Indice niveau={2} titre="Un rendu mis à jour n’est pas une sauvegarde distante">
+
+La mise à jour locale peut rendre le bouton actif tout de suite. Pour conserver le favori après une navigation ou un rechargement, une autre stratégie peut être nécessaire.
+
+</Indice>
+
+<Exercice id="exercice" titre="Distingue état local et persistance">
+
+Pour un bouton favori, nomme une valeur d’état utile et décris un test simple qui aide à savoir si le favori a été conservé au-delà du rendu courant.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Une valeur comme `estFavori` peut piloter l’apparence du bouton. Après le clic, on peut recharger la page ou rouvrir la liste pour observer si la valeur est restaurée. Sa présence après rechargement suggère qu’elle est conservée quelque part, mais il faut d’autres indices pour savoir si la source est le serveur, un stockage local ou un cache.
+
+</Indice>
+
+</Exercice>

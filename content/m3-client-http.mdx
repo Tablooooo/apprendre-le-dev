@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'Client HTTP : demander des données',
+  verification: { aiReviewed: true, humanValidated: false, references: ['MDN: Fetch API', 'MDN: Using Fetch'] },
+}
+
+# Client HTTP : demander des données
+
+Un client HTTP est du code qui prépare et envoie une requête HTTP, puis traite la réponse disponible. Dans un navigateur, l’API `fetch` est une option intégrée ; d’autres bibliothèques proposent d’autres interfaces.
+
+<Pourquoi id="pourquoi">
+
+Pour afficher les recettes récentes, Salomé ouvre la page et ne voit que le squelette de chargement. Elle veut comprendre quel code demande les recettes au serveur et comment la réponse devient utilisable par l’interface.
+
+Le client HTTP est le point côté application qui réalise l’échange réseau. En JavaScript, `fetch` renvoie une promesse qui se résout quand une réponse est disponible, y compris pour des statuts HTTP d’erreur tels que `404` ; il faut vérifier `response.ok` ou le statut. Un problème réseau peut rejeter la promesse. Ces cas différents doivent être traités séparément.
+
+</Pourquoi>
+
+<ParcoursMini zone="navigateur" etape="Le client HTTP envoie une requête au serveur" />
+
+<Instructions id="instructions">
+
+1. Dans un projet de démonstration, repère le code qui appelle `fetch`, Axios ou un autre client pour obtenir une liste.
+2. Note l’URL et les options envoyées. Si aucune méthode n’est indiquée avec `fetch`, la méthode par défaut est `GET`.
+3. Repère comment le code traite le résultat asynchrone et lit éventuellement le corps, par exemple avec `response.json()`.
+4. Vérifie si le code distingue une réponse HTTP non réussie (`response.ok` faux) d’un échec réseau qui rejette la promesse.
+5. Suis la donnée jusqu’au composant qui l’affiche, sans supposer que le client HTTP choisit lui-même la page.
+
+</Instructions>
+
+<Indice niveau={1} titre="Cherche `fetch` ou le client utilisé">
+
+Le point d’appel indique généralement quelle URL l’application demande.
+
+</Indice>
+
+<Indice niveau={2} titre="Une réponse 404 n’est pas nécessairement un rejet de fetch">
+
+`fetch` fournit normalement un objet Response pour une réponse HTTP, même si son statut n’est pas dans la classe `2xx`. Le code doit vérifier ce statut ; les erreurs réseau suivent un autre chemin.
+
+</Indice>
+
+<Exercice id="exercice" titre="Décris une requête dans le code">
+
+Dans un exemple qui charge une liste, note l’URL, la façon dont le corps de réponse est lu et la vérification qui traite une réponse HTTP non réussie.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Un exemple possible appelle `fetch('/api/recettes')`, vérifie `response.ok`, puis lit `response.json()`. La requête peut aussi échouer au niveau réseau, ce qui doit être traité selon le code utilisé. `fetch` n’assure pas que l’interface choisira la bonne route client ni que le serveur renverra les données attendues.
+
+</Indice>
+
+</Exercice>

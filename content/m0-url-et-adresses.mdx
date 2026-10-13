@@ -1,0 +1,57 @@
+export const metadata = {
+  title: 'Lire une URL sans deviner',
+  verification: {
+    aiReviewed: true,
+    humanValidated: false,
+    references: ['MDN: What is a URL?', 'WHATWG URL Standard'],
+  },
+}
+
+# Lire une URL sans deviner
+
+Une URL (adresse Web) donne au navigateur des informations pour accéder à une ressource. Elle ne décrit pas à elle seule tout ce que le serveur fera.
+
+<Pourquoi id="pourquoi">
+
+Nora veut ouvrir directement la page de la recette « soupe de lentilles » que son ami lui a envoyée. Le lien s’arrête à `/recettes` : il affiche la liste, pas la recette précise. Elle voit aussi `?tri=recent` dans une autre adresse et se demande si cela fait partie du nom de domaine.
+
+Savoir découper une URL aide Nora à repérer quelle ressource est visée et quelles informations sont transmises dans l’adresse. Cela évite de confondre le domaine, le chemin et les paramètres.
+
+</Pourquoi>
+
+<ParcoursMini zone="navigateur" etape="L’adresse qui désigne une ressource" />
+
+<Instructions id="instructions">
+
+1. Copie cette adresse d’exemple dans un éditeur de texte, sans l’ouvrir : `https://cuisine.example/recettes/42?tri=recent#ingredients`.
+2. Repère le schéma (`https`), puis l’hôte (`cuisine.example`). Le schéma indique comment le navigateur accède à la ressource ; l’hôte identifie la destination réseau sous ce nom.
+3. Repère le chemin (`/recettes/42`). Il identifie la ressource ou le traitement demandé dans le contexte du serveur.
+4. Repère la chaîne de requête (`?tri=recent`). Elle contient des paramètres d’URL. Dans cet exemple, `tri` vaut `recent`.
+5. Repère le fragment (`#ingredients`). Il désigne une partie du document côté client. Le fragment n’est pas envoyé au serveur dans la requête HTTP.
+6. Change uniquement `42` en `57`. Décris ce qui a changé dans l’adresse, sans conclure quel contenu le serveur renverra.
+
+</Instructions>
+
+<Indice niveau={1} titre="Découpe en morceaux">
+
+Dans l’exemple, les séparateurs utiles sont `://`, `/`, `?` et `#`.
+
+</Indice>
+
+<Indice niveau={2} titre="Associe les morceaux">
+
+`https://` est le schéma, `cuisine.example` l’hôte, `/recettes/42` le chemin, `?tri=recent` la requête (query string), et `#ingredients` le fragment.
+
+</Indice>
+
+<Exercice id="exercice" titre="Trace l’adresse d’une recette">
+
+Pour `https://cuisine.example/recettes/57?lang=fr#avis`, note le schéma, l’hôte, le chemin, le paramètre et le fragment. Puis indique quelle partie n’est pas transmise au serveur dans la requête HTTP.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Schéma : `https`. Hôte : `cuisine.example`. Chemin : `/recettes/57`. Paramètre : `lang=fr` dans la chaîne qui commence par `?`. Fragment : `avis` après `#`. Le fragment est traité par le navigateur et n’est pas inclus dans la requête HTTP. L’URL seule ne dit pas si la recette existe réellement.
+
+</Indice>
+
+</Exercice>

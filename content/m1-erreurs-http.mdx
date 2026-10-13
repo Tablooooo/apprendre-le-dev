@@ -1,0 +1,53 @@
+export const metadata = {
+  title: 'Comprendre les erreurs 404 et 500',
+  verification: { aiReviewed: true, humanValidated: false, references: ['MDN: HTTP response status codes', 'RFC 9110'] },
+}
+
+# Comprendre les erreurs 404 et 500
+
+`404` et `500` sont des codes de statut HTTP. Ils indiquent des classes de résultat différentes, mais le code seul ne révèle pas la cause précise.
+
+<Pourquoi id="pourquoi">
+
+Jules ouvre le lien d’une recette partagé dans le groupe de cuisine et tombe sur une page « Introuvable ». Plus tard, en actualisant la liste, il voit une erreur « Serveur indisponible ». Il se demande si les deux problèmes viennent de la même cause.
+
+Comparer les statuts aide à orienter une enquête sans sauter aux conclusions. Une réponse `404` indique que le serveur n’a pas trouvé de représentation pour la cible ou ne veut pas révéler qu’elle existe ; `500` indique une erreur interne générique du serveur. Les détails exacts ne se déduisent pas du code seul.
+
+</Pourquoi>
+
+<ParcoursMini zone="http" etape="Une réponse d’erreur revient au navigateur" />
+
+<Instructions id="instructions">
+
+1. Dans un environnement de démonstration ou un site où tu es autorisé à naviguer, ouvre les outils de développement et l’onglet **Réseau** (*Network*).
+2. Repère la requête qui correspond à la page en erreur ; distingue le statut de cette requête des éventuels statuts de ressources comme les images ou scripts.
+3. Note l’URL demandée et le statut HTTP. Ne cherche pas à provoquer une erreur sur un service que tu n’es pas autorisé à tester.
+4. Si le statut est `404`, décris uniquement ce qu’indique la réponse pour cette cible.
+5. Si le statut est `500`, note que la réponse signale une erreur interne côté serveur, mais n’invente pas l’exception ou la ligne de code responsable.
+6. Compare le message affiché par la page au statut observé. Note une prochaine vérification raisonnable, par exemple vérifier l’URL ou réessayer plus tard.
+
+</Instructions>
+
+<Indice niveau={1} titre="Commence par le statut de la bonne requête">
+
+Une page peut charger plusieurs ressources ; le statut d’une image manquante n’est pas forcément celui du document principal.
+
+</Indice>
+
+<Indice niveau={2} titre="Distingue l’indication de la cause">
+
+`404` concerne la ressource ciblée introuvable ou non divulguée. `500` indique une erreur interne générique. Aucun de ces codes ne nomme à lui seul la cause précise.
+
+</Indice>
+
+<Exercice id="exercice" titre="Choisis une conclusion prudente">
+
+Pour une requête de page en statut `500`, écris ce que tu peux affirmer et une chose que tu ne peux pas savoir à partir du statut seul.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Tu peux dire que la réponse porte le statut `500`, associé à une erreur interne générique côté serveur. Tu ne peux pas identifier l’exception précise, la ligne fautive ou l’état de la base de données à partir de ce code seul. Le corps de réponse et les journaux serveur, si tu y as accès, sont d’autres sources d’information.
+
+</Indice>
+
+</Exercice>

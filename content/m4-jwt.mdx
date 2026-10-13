@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'Comprendre le rôle d’un JWT',
+  verification: { aiReviewed: true, humanValidated: false, references: ['RFC 7519: JSON Web Token', 'OWASP: JSON Web Token Cheat Sheet'] },
+}
+
+# Comprendre le rôle d’un JWT
+
+Un JWT (JSON Web Token) est un format compact de jeton qui transporte des claims (affirmations) encodés et peut être signé. Un JWT signé n’est pas nécessairement chiffré : son contenu peut être lisible par qui le possède.
+
+<Pourquoi id="pourquoi">
+
+Après sa connexion à une application de démonstration, Louis voit un long texte en trois parties dans une requête. Un tutoriel l’appelle JWT et dit qu’il est « sécurisé », alors il se demande si son contenu est caché.
+
+Comprendre le rôle d’un JWT aide Louis à ne pas confondre encodage, signature et chiffrement. La signature peut permettre de détecter des modifications selon la configuration et la clé de vérification ; elle ne rend pas le contenu secret. Un JWT n’impose pas à lui seul où il est stocké, comment il est transmis, ni qu’il soit le bon choix pour toute application.
+
+</Pourquoi>
+
+<ParcoursMini zone="http" etape="Le jeton peut accompagner une requête" />
+
+<Instructions id="instructions">
+
+1. Lis cette leçon sans ouvrir de jeton appartenant à un vrai compte. N’en colle jamais un dans un décodeur public.
+2. Dans une documentation ou un exemple fictif, repère les termes « header », « payload » et « signature ».
+3. Distingue le décodage des parties encodées de la vérification cryptographique de la signature.
+4. Note quelles validations sont nécessaires selon la spécification et la configuration de confiance (algorithme attendu, émetteur, audience, dates, par exemple).
+5. Explique pourquoi une signature valide n’empêche pas de lire un payload JWT signé non chiffré.
+
+</Instructions>
+
+<Indice niveau={1} titre="Trois parties ne veulent pas dire trois secrets">
+
+Un JWT compact courant sépare des segments, mais leur contenu peut être encodé sans être chiffré.
+
+</Indice>
+
+<Indice niveau={2} titre="Signature et confidentialité ont des rôles différents">
+
+La signature sert à vérifier l’intégrité et l’origine selon une clé et des règles de validation. Le chiffrement est ce qui vise à cacher le contenu.
+
+</Indice>
+
+<Exercice id="exercice" titre="Corrige une affirmation imprécise">
+
+Quelqu’un affirme : « Le payload de tout JWT est secret parce que le jeton est signé. » Réécris cette phrase de façon techniquement juste.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+« Un JWT signé courant protège l’intégrité de ses claims si sa signature est vérifiée correctement, mais ne chiffre pas nécessairement son contenu. Toute personne qui obtient le jeton peut généralement décoder ses parties non chiffrées. » Le format JWE, lui, concerne le chiffrement ; il ne faut pas le confondre avec un JWT signé JWS.
+
+</Indice>
+
+</Exercice>

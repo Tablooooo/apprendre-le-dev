@@ -1,0 +1,57 @@
+export const metadata = {
+  title: 'Intention et résultat HTTP',
+  verification: {
+    aiReviewed: true,
+    humanValidated: false,
+    references: ['MDN: HTTP request methods', 'MDN: HTTP response status codes', 'RFC 9110'],
+  },
+}
+
+# Intention et résultat HTTP
+
+La méthode est envoyée dans la requête ; le code de statut est renvoyé dans la réponse. Ils décrivent deux côtés différents d’un échange.
+
+<Pourquoi id="pourquoi">
+
+Karim clique deux fois sur « Ajouter aux favoris » parce que l’interface ne change pas. Il voit ensuite deux favoris identiques. Pour comprendre ce qui s’est passé, il examine l’onglet Réseau : les deux lignes sont des requêtes `POST`, et chacune a reçu une réponse `201`.
+
+La méthode aide à exprimer l’intention de la requête. Le statut décrit le résultat HTTP indiqué par la réponse. Les regarder ensemble aide Karim à enquêter, mais ces seules valeurs ne prouvent pas que l’application empêche les doublons ni qu’une opération métier a réussi comme prévu.
+
+</Pourquoi>
+
+<ParcoursMini zone="http" etape="La méthode part, le statut revient" />
+
+<Instructions id="instructions">
+
+1. Ouvre les outils de développement, puis l’onglet **Réseau** (*Network*).
+2. Recharge une page et sélectionne une requête `document` ou une ressource statique. Ne soumets pas de formulaire réel pour cet exercice.
+3. Dans les détails, repère la méthode de la requête et, séparément, le statut de la réponse.
+4. Repère si la méthode est `GET`, `POST`, `PUT`, `PATCH` ou `DELETE`. Ces noms expriment une sémantique conventionnelle, pas la preuve que le serveur respecte cette convention.
+5. Lis le statut : `2xx` signifie que la réponse appartient à la classe des réponses réussies au niveau HTTP ; `4xx` indique une erreur attribuée au client dans la sémantique HTTP ; `5xx` indique une erreur côté serveur.
+6. Note la différence entre « la requête a reçu un statut de succès HTTP » et « l’utilisateur a obtenu exactement le résultat métier attendu ».
+
+</Instructions>
+
+<Indice niveau={1} titre="Deux colonnes mentales">
+
+La méthode décrit la demande envoyée. Le statut est le code reçu en retour.
+
+</Indice>
+
+<Indice niveau={2} titre="Exemples à lire avec prudence">
+
+`GET` sert conventionnellement à récupérer une représentation et est défini comme une méthode sûre. `POST` demande au serveur de traiter le contenu selon la ressource ciblée. Un statut `201` indique qu’une ou plusieurs ressources ont été créées selon la sémantique HTTP, mais ne dit pas à lui seul si l’interface ou la règle métier est correcte.
+
+</Indice>
+
+<Exercice id="exercice" titre="Sépare la demande de la réponse">
+
+On te donne cet échange d’exemple : requête `POST /favoris`, réponse `201 Created`. Écris séparément ce qu’indique la méthode et ce qu’indique le statut. Ajoute une chose que cet échange ne permet pas de savoir.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+`POST` est la méthode envoyée dans la requête. `201 Created` est le statut de la réponse et indique une création au sens HTTP. Cet échange seul ne permet pas de savoir si la règle anti-doublon fonctionne, si l’utilisateur voit correctement le favori, ni quel stockage interne a été utilisé.
+
+</Indice>
+
+</Exercice>

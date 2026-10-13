@@ -1,0 +1,53 @@
+export const metadata = {
+  title: 'Garder un codebase sain',
+  verification: { aiReviewed: true, humanValidated: false, references: ['GitHub Docs: About code owners', 'Google: Engineering Practices Documentation'] },
+}
+
+# Garder un codebase sain
+
+L’hygiène d’un codebase regroupe des pratiques qui maintiennent le projet compréhensible et vérifiable : changements ciblés, dépendances suivies, automatisations utiles et documentation à jour. Ce n’est pas une mesure unique ni une promesse d’absence de défauts.
+
+<Pourquoi id="pourquoi">
+
+Après plusieurs mois sans toucher à l’application de recettes, Youssef tente de l’installer sur une nouvelle machine. Une commande décrite dans le README n’existe plus et la compilation échoue après la mise à jour d’une dépendance. Il ne sait pas si le code, la configuration ou la documentation est périmé.
+
+Des vérifications répétables et des notes proches du code réduisent les surprises lors de l’installation et des changements. Un codebase sain évolue continuellement : on retire les instructions mortes, on examine les dépendances selon le risque et on garde les vérifications utiles exécutables. Aucune checklist ne garantit à elle seule la qualité du produit.
+
+</Pourquoi>
+
+<ParcoursMini zone="transversal" etape="Le projet reste installable, vérifiable et compréhensible" />
+
+<Instructions id="instructions">
+
+1. Dans une copie de travail du projet, suis les étapes d’installation documentées sans contourner les erreurs.
+2. Lance les commandes habituelles de tests, typage ou compilation et note précisément ce qui échoue.
+3. Compare le résultat aux scripts déclarés dans le manifeste de dépendances et aux instructions du README.
+4. Choisis une incohérence à corriger, par exemple une commande documentée mais absente, ou un test qui n’est plus exécuté.
+5. Fais un changement ciblé, puis relance la vérification concernée et mets à jour la documentation qui décrit le comportement réel.
+6. Avant de changer une dépendance, vérifie son usage, sa version, les avis de sécurité applicables et le risque de régression.
+
+</Instructions>
+
+<Indice niveau={1} titre="Reproduis le parcours d’une nouvelle personne">
+
+Une installation documentée mais jamais essayée peut contenir des étapes mortes.
+
+</Indice>
+
+<Indice niveau={2} titre="Rends le problème observable">
+
+Note la commande, le résultat attendu et le résultat réel. Corrige ensuite une cause précise plutôt que de masquer l’échec.
+
+</Indice>
+
+<Exercice id="exercice" titre="Choisis une amélioration vérifiable">
+
+Repère dans un projet une instruction de développement qui pourrait être obsolète. Explique comment la vérifier et quelle preuve te permettrait de dire que la documentation est à jour.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+On peut suivre l’installation depuis une copie propre et comparer les commandes du README aux scripts du manifeste. Si la commande documentée s’exécute et produit le résultat décrit, cela vérifie ce parcours précis. Cela ne prouve pas que tous les environnements ou toutes les instructions sont corrects.
+
+</Indice>
+
+</Exercice>

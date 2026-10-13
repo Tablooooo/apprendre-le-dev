@@ -1,0 +1,53 @@
+export const metadata = {
+  title: 'Connexion : retrouver une identité',
+  verification: { aiReviewed: true, humanValidated: false, references: ['MDN: HTTP authentication', 'OWASP: Authentication Cheat Sheet'] },
+}
+
+# Connexion : retrouver une identité
+
+Une connexion envoie des informations permettant au serveur de tenter d’authentifier une personne. La réponse observée ne révèle pas à elle seule toutes les vérifications qui ont été faites.
+
+<Pourquoi id="pourquoi">
+
+Mehdi saisit son adresse e-mail et son mot de passe sur le site de son cours. Après le clic, la page affiche « Identifiants incorrects », alors qu’il est certain de son mot de passe. Il veut déterminer si le navigateur a envoyé la demande et quelle réponse a été reçue, sans exposer ses identifiants.
+
+Observer l’échange aide à distinguer une erreur de saisie locale, un problème de transport visible et une réponse du serveur. Cela ne permet pas de tester ou deviner le mot de passe d’une personne : on observe uniquement un compte de test autorisé et des données fictives.
+
+</Pourquoi>
+
+<ParcoursMini zone="http" etape="Les identifiants fictifs partent, une réponse revient" />
+
+<Instructions id="instructions">
+
+1. Utilise uniquement un environnement de démonstration ou un compte de test autorisé. N’essaie pas d’autres mots de passe sur un vrai compte.
+2. Ouvre les outils de développement, sélectionne **Réseau** (*Network*) et active « Conserver le journal » si nécessaire.
+3. Saisis les identifiants fictifs prévus par la démonstration, puis envoie le formulaire une fois.
+4. Repère la requête de connexion. Note la méthode, l’URL et le statut de sa réponse, mais ne copie pas le corps contenant les identifiants.
+5. Observe si une autre requête suit la réponse, par exemple une demande de profil. Ne conclus pas que la personne est connectée uniquement parce qu’une requête a réussi.
+6. Efface les requêtes de l’onglet et ferme la session de test en respectant les consignes du site.
+
+</Instructions>
+
+<Indice niveau={1} titre="Ne regarde pas les secrets">
+
+Tu peux noter méthode et statut sans ouvrir ni copier le contenu contenant les identifiants.
+
+</Indice>
+
+<Indice niveau={2} titre="HTTP et authentification ne sont pas le même constat">
+
+Un statut HTTP indique le résultat de la requête au niveau du protocole. La preuve que l’application a établi une session ou une autre forme d’état d’authentification doit être cherchée dans le comportement prévu du site, sans exposer les jetons ou cookies.
+
+</Indice>
+
+<Exercice id="exercice" titre="Décris une tentative de connexion de test">
+
+Sur un site de démonstration autorisé, relève la méthode et le statut de la demande de connexion avec des données fictives. Écris pourquoi un statut `200` seul ne suffit pas à affirmer que l’authentification a réussi.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+La méthode appartient à la requête et le statut à la réponse. Un `200` signifie que la réponse est dans la classe des réponses HTTP réussies, mais l’application peut aussi renvoyer une page ou un corps qui indique un échec d’authentification. Il faut examiner le résultat fonctionnel prévu sans révéler d’identifiants ni de jetons.
+
+</Indice>
+
+</Exercice>

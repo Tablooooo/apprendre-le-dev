@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'Injection de dépendances',
+  verification: { aiReviewed: true, humanValidated: false, references: ['Martin Fowler: Inversion of Control Containers and the Dependency Injection pattern', 'Spring: Dependency Injection'] },
+}
+
+# Injection de dépendances
+
+L’injection de dépendances consiste à fournir à un composant les objets dont il a besoin plutôt qu’à lui faire construire lui-même toutes ces dépendances. Le conteneur automatique est une implémentation possible, pas une condition de la notion.
+
+<Pourquoi id="pourquoi">
+
+Pour tester une création de recette, Théo voit que son contrôleur construit lui-même un service, qui crée directement un client de base de données. Il ne peut pas remplacer facilement cette connexion par un faux objet de test.
+
+L’injection rend visibles les dépendances et permet de fournir une implémentation adaptée au contexte, par exemple une vraie dépendance en production et une doublure en test. Elle ne signifie pas nécessairement que tout est automatique : le câblage peut être fait par un conteneur ou par du code explicite.
+
+</Pourquoi>
+
+<ParcoursMini zone="transversal" etape="Les dépendances sont fournies au composant" />
+
+<Instructions id="instructions">
+
+1. Dans un projet d’exemple, ouvre un contrôleur ou un service et liste les objets dont il a besoin.
+2. Repère s’ils sont construits dans la classe, passés en argument ou fournis par un conteneur.
+3. Suis le point de composition où les implémentations concrètes sont associées aux interfaces ou types utilisés.
+4. Vérifie comment un test peut fournir une dépendance de remplacement, si le projet le prévoit.
+5. Distingue le mécanisme d’injection de ce que fait le service une fois reçu : l’injection câble les objets, elle n’exécute pas la règle métier.
+
+</Instructions>
+
+<Indice niveau={1} titre="Regarde qui construit les dépendances">
+
+Si le composant reçoit l’objet de l’extérieur, plutôt que de le créer lui-même, tu observes une forme d’injection.
+
+</Indice>
+
+<Indice niveau={2} titre="Le conteneur n’est qu’une façon de câbler">
+
+Un framework peut automatiser la création, mais une fonction peut aussi recevoir explicitement ses dépendances en paramètres.
+
+</Indice>
+
+<Exercice id="exercice" titre="Repère ce qui est injecté">
+
+Un `RecipeService` reçoit `RecipeRepository` dans son constructeur. Nomme la dépendance, indique qui la fournit dans l’application, et précise une chose que l’injection ne fait pas.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+`RecipeRepository` est une dépendance de `RecipeService`. Le point de composition ou un conteneur configuré fournit une implémentation. L’injection ne valide pas les données, n’exécute pas la règle métier et ne garantit pas à elle seule que l’implémentation choisie est correcte.
+
+</Indice>
+
+</Exercice>

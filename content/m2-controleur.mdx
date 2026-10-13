@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'Le contrôleur reçoit la requête',
+  verification: { aiReviewed: true, humanValidated: false, references: ['Express: Using middleware', 'MDN: HTTP messages'] },
+}
+
+# Le contrôleur reçoit la requête
+
+Un contrôleur (ou handler) est une façon courante d’organiser le code qui reçoit une requête routée et participe à la production d’une réponse HTTP. Ce rôle n’a pas une définition universelle imposée par HTTP.
+
+<Pourquoi id="pourquoi">
+
+Après avoir trouvé la route de `/api/recettes`, Hugo ouvre le fichier associé et y voit la lecture des paramètres, la vérification des données, l’appel aux règles de l’application et la construction de la réponse, tout au même endroit. Il a du mal à savoir quelle partie reçoit la requête et laquelle réalise le travail demandé.
+
+Identifier le rôle du contrôleur aide à repérer le point d’entrée du traitement applicatif. Les architectures diffèrent : le contrôleur peut coordonner d’autres composants ou contenir davantage de logique dans un petit projet. Le nom seul ne garantit pas une séparation particulière.
+
+</Pourquoi>
+
+<ParcoursMini zone="serveur" etape="La route transmet la requête au contrôleur" />
+
+<Instructions id="instructions">
+
+1. Dans un projet pédagogique ou un projet que tu peux lire, pars d’une route `GET` ou `POST` repérée à la leçon précédente.
+2. Suis la référence vers la fonction appelée lorsque la route correspond.
+3. Repère les informations de requête qu’elle consulte : paramètres de chemin, chaîne de requête, en-têtes ou corps, selon le cas.
+4. Repère comment la réponse est produite ou déléguée. Note si la fonction appelle un service ou si elle exécute directement du travail.
+5. Résume ce que fait ce contrôleur en une phrase basée sur le code observé, plutôt que sur son nom.
+
+</Instructions>
+
+<Indice niveau={1} titre="Suis le lien depuis la route">
+
+Le contrôleur est souvent la fonction vers laquelle la déclaration de route renvoie.
+
+</Indice>
+
+<Indice niveau={2} titre="Repère entrée et sortie">
+
+Regarde quelles parties de la requête sont lues, puis où le statut et le corps de réponse sont définis ou délégués.
+
+</Indice>
+
+<Exercice id="exercice" titre="Décris le rôle d’un handler observé">
+
+À partir d’un handler d’exemple, note une donnée de requête qu’il lit, un traitement qu’il déclenche et comment une réponse est produite. Si un de ces éléments n’est pas dans le handler, écris où il délègue.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Une description possible : « Ce handler lit l’identifiant dans le chemin, demande au service de retrouver la recette, puis transforme le résultat en réponse HTTP. » Si le handler contient lui-même la recherche ou la règle, décris ce constat : le rôle et le découpage réel dépendent du codebase.
+
+</Indice>
+
+</Exercice>

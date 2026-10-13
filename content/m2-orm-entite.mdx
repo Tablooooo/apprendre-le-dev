@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'ORM et entités : représenter les données',
+  verification: { aiReviewed: true, humanValidated: false, references: ['Martin Fowler: Object-Relational Mapping', 'Prisma: Data model'] },
+}
+
+# ORM et entités : représenter les données
+
+Un ORM (Object-Relational Mapper) relie des structures utilisées dans le code à une base relationnelle. Une entité est un terme d’architecture pour une donnée du domaine suivie comme un objet identifiable ; les définitions varient selon les outils.
+
+<Pourquoi id="pourquoi">
+
+Après avoir enregistré une recette, Malik voit qu’elle possède un identifiant et peut être modifiée plus tard. Dans le code, il trouve un modèle `Recipe` et se demande si ce modèle est la table SQL elle-même.
+
+Un ORM peut traduire entre des modèles du code et des opérations sur une base relationnelle. Une entité dans certains modèles d’architecture porte une identité au fil de son cycle de vie ; elle n’est pas automatiquement identique à une ligne ou à une table. Le mapping précis dépend de l’ORM et du schéma utilisé.
+
+</Pourquoi>
+
+<ParcoursMini zone="bdd" etape="Le modèle du code est relié au stockage" />
+
+<Instructions id="instructions">
+
+1. Dans un projet de démonstration, repère le modèle de recette et le schéma de données associé.
+2. Identifie les champs du modèle, puis trouve comment ils correspondent aux colonnes ou structures stockées.
+3. Cherche où l’ORM est utilisé pour lire ou écrire ce modèle.
+4. Note un cas où le modèle du code ne correspond pas forcément exactement à une table (par exemple, champs calculés ou données provenant de plusieurs sources).
+5. Décris les correspondances observées sans supposer que tous les ORM fonctionnent de la même manière.
+
+</Instructions>
+
+<Indice niveau={1} titre="Modèle et table ne sont pas synonymes">
+
+Regarde le mapping défini par le projet plutôt que de supposer une correspondance automatique champ à champ.
+
+</Indice>
+
+<Indice niveau={2} titre="Observe l’outil précis utilisé">
+
+Les ORM diffèrent dans leur schéma, leurs requêtes, leurs transactions et les objets qu’ils construisent.
+
+</Indice>
+
+<Exercice id="exercice" titre="Compare le modèle et son stockage">
+
+Pour le modèle `Recipe` d’un exemple, relève deux champs du code et indique où leur stockage est déclaré. Note une différence ou une incertitude entre ces représentations.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Exemple : le modèle contient `title` et `authorId`, et le schéma de base les mappe à `title` et `author_id`. L’ORM peut configurer le nom de colonne ou convertir les valeurs. Il faut lire la configuration réelle : le nom de la classe ne prouve pas que la structure stockée est identique.
+
+</Indice>
+
+</Exercice>

@@ -1,0 +1,12 @@
+# Dépendances Node.js
+node_modules/
+
+# Fichiers générés et caches
+dist/
+build/
+.cache/
+
+# Fichiers système et éditeur
+.DS_Store
+Thumbs.db
+.idea/

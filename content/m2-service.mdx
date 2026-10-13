@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'Confier les règles à un service',
+  verification: { aiReviewed: true, humanValidated: false, references: ['Martin Fowler: Service Layer', 'Microsoft: Design the infrastructure persistence layer'] },
+}
+
+# Confier les règles à un service
+
+Dans certaines architectures, un service porte ou coordonne des règles métier réutilisables, distinctes de la réception HTTP. Le terme « service » varie selon les frameworks et les codebases.
+
+<Pourquoi id="pourquoi">
+
+Bastien découvre que le handler de création de recette vérifie le titre, vérifie si l’auteur peut publier, calcule une durée estimée et prépare la réponse. Une autre page devra appliquer une règle de publication similaire. Il se demande comment éviter de copier la règle dans deux points d’entrée.
+
+Un service peut centraliser une opération ou une règle métier appelée depuis plusieurs contextes. Le contrôleur reste alors chargé de la frontière HTTP et le service du comportement de l’application. Ce découpage est un choix d’architecture, pas une obligation du protocole HTTP.
+
+</Pourquoi>
+
+<ParcoursMini zone="serveur" etape="Le contrôleur délègue la logique métier" />
+
+<Instructions id="instructions">
+
+1. Dans un exemple autorisé, suis l’appel effectué par un contrôleur de création vers les fonctions qu’il utilise.
+2. Repère une règle qui concerne le domaine (par exemple, qui peut publier une recette) et non la mise en forme d’une réponse HTTP.
+3. Vérifie si cette règle est exécutée dans un service ou directement dans le contrôleur. Décris le code réel.
+4. Cherche un second point d’entrée qui appelle éventuellement la même règle.
+5. Note ce que le service reçoit et renvoie, sans supposer que tous les projets nomment cette couche « service ».
+
+</Instructions>
+
+<Indice niveau={1} titre="Demande-toi si la règle dépend de HTTP">
+
+Une règle sur le droit de publier peut être utile ailleurs que dans une requête Web ; un code de statut, lui, appartient à la réponse HTTP.
+
+</Indice>
+
+<Indice niveau={2} titre="Suis les appels, pas le nom du fichier">
+
+Le contenu d’un service se reconnaît à ce qu’il fait et aux règles qu’il applique, pas seulement à un suffixe de nom.
+
+</Indice>
+
+<Exercice id="exercice" titre="Sépare réponse HTTP et règle métier">
+
+Pour l’action « publier une recette », écris un exemple de responsabilité du contrôleur et un exemple de règle que pourrait porter un service.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Le contrôleur peut extraire les données de la requête et choisir comment traduire le résultat en réponse HTTP. Un service peut vérifier si l’auteur est autorisé à publier et appliquer la règle métier correspondante. Dans un petit projet, ces responsabilités peuvent être réunies ; il faut décrire le code réellement présent.
+
+</Indice>
+
+</Exercice>

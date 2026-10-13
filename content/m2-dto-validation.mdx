@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'Valider ce qui entre avec un DTO',
+  verification: { aiReviewed: true, humanValidated: false, references: ['OWASP: Input Validation Cheat Sheet', 'MDN: Request'] },
+}
+
+# Valider ce qui entre avec un DTO
+
+Un DTO (Data Transfer Object, objet de transfert) décrit la forme des données échangées à une frontière de l’application. La validation vérifie que les entrées respectent les règles attendues ; le DTO et la validation sont liés, mais ce ne sont pas la même opération.
+
+<Pourquoi id="pourquoi">
+
+Noémie modifie une requête de test pour envoyer une recette sans titre et avec un temps de cuisson négatif. L’interface habituelle aurait bloqué une partie de ces valeurs, mais le serveur reçoit quand même la requête. Elle veut comprendre pourquoi la vérification ne peut pas reposer uniquement sur le formulaire.
+
+Les données envoyées par un client doivent être considérées comme des entrées à vérifier à la frontière serveur. Un DTO peut décrire la forme attendue ; des règles de validation peuvent ensuite accepter ou refuser les valeurs. La validation côté client améliore l’expérience, mais elle ne remplace pas celle côté serveur.
+
+</Pourquoi>
+
+<ParcoursMini zone="serveur" etape="Les données entrantes sont vérifiées" />
+
+<Instructions id="instructions">
+
+1. Dans un projet d’apprentissage, trouve le type ou schéma qui décrit les données reçues pour créer une recette.
+2. Liste les champs attendus et distingue leur type (texte, nombre) de leurs contraintes (champ requis, plage permise).
+3. Repère où les contraintes sont exécutées avant le traitement métier. Les noms et bibliothèques diffèrent selon le projet.
+4. Observe la réponse prévue pour une entrée invalide, sans envoyer de données à un service tiers.
+5. Explique pourquoi un champ « requis » affiché dans le navigateur n’est pas une garantie que toute requête reçue par le serveur le contient.
+
+</Instructions>
+
+<Indice niveau={1} titre="Forme et règles sont deux questions">
+
+Le DTO décrit les champs et leur forme ; la validation décide si les valeurs satisfont les contraintes.
+
+</Indice>
+
+<Indice niveau={2} titre="Le serveur est une frontière de confiance">
+
+Un client peut être modifié ou remplacé. Le serveur doit contrôler ses propres entrées avant d’appliquer une règle métier.
+
+</Indice>
+
+<Exercice id="exercice" titre="Écris les règles d’entrée d’une recette">
+
+Pour une création de recette avec `titre` et `tempsPreparation`, propose la forme attendue de ces champs et une contrainte pour chacun. Sépare ces règles de toute règle métier plus large.
+
+<Indice niveau={3} titre="Solution possible de l’exercice">
+
+Le DTO peut décrire `titre` comme une chaîne et `tempsPreparation` comme un nombre. La validation peut exiger un titre non vide après normalisation et un temps positif dans une limite choisie par l’application. Les bornes exactes sont une décision produit : HTTP ne les impose pas. La règle métier, comme le droit de publier une recette, est une vérification distincte.
+
+</Indice>
+
+</Exercice>
