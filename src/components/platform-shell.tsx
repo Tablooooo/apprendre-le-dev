@@ -40,14 +40,14 @@ export function PlatformShell({ children }: { children: React.ReactNode }) {
       <p className="sidebar-label">APPRENDRE</p>
       <nav className="main-nav">
         <Link className={`nav-link ${pathname === '/' ? 'is-active' : ''}`} href="/"><span className="nav-glyph">⌂</span> Mon parcours</Link>
-        <a className="nav-link" href="/#roadmap"><span className="nav-glyph">☷</span> Roadmap</a>
-        <a className="nav-link" href="/#concepts"><span className="nav-glyph">⌘</span> Carte des concepts</a>
+        <Link className="nav-link" href="/#roadmap"><span className="nav-glyph">☷</span> Roadmap</Link>
+        <Link className="nav-link" href="/#concepts"><span className="nav-glyph">⌘</span> Carte des concepts</Link>
         <Link className={`nav-link ${pathname === '/parcours' ? 'is-active' : ''}`} href="/parcours"><span className="nav-glyph">↔</span> Parcours de la donnée</Link>
       </nav>
       <div className="sidebar-rule" />
       <p className="sidebar-label">LES MODULES</p>
       <nav className="module-nav" aria-label="Modules de formation">
-        {modules.map((module, index) => <a className="module-link" href={`/#${module.id}`} key={module.id}><span className={`module-index ${index === 0 ? 'module-current' : ''}`}>{String(index).padStart(2, '0')}</span><span>{module.title}</span></a>)}
+        {modules.map((module, index) => <Link className="module-link" href={`/#${module.id}`} key={module.id}><span className={`module-index ${index === 0 ? 'module-current' : ''}`}>{String(index).padStart(2, '0')}</span><span>{module.title}</span></Link>)}
       </nav>
       <div className="sidebar-bottom"><div className="learner-mark">✳</div><p>Tu apprends à comprendre,<br />pas à tout retenir.</p></div>
     </aside>

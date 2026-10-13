@@ -5,6 +5,8 @@ import { ReferenceLesson } from '../../../components/reference-lesson'
 import { CurriculumLesson } from '../../../components/curriculum-lesson'
 import { contentByLesson } from '../../../components/content-by-lesson'
 
+export const dynamicParams = false
+
 export function generateStaticParams() {
   return lessons.map(({ id }) => ({ lessonId: id }))
 }
